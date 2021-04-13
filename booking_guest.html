@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Booking gust page</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='booking.css'>
+    <script src='booking.js'></script>
+</head>
+
+<body>
+    <form name="myForm" id="myForm" action="confirm_guest.html">
+        <h1>ทำการจอง</h1>
+        <fieldset>
+            <div id="span1">
+                <p><b>จำนวน</b></p>
+                <p>สุนัขพันธ์ใหญ่ (12 กก.ขึ้นไป)     
+                   <input id="numbigpet" type="number" name="bigpet" min="0" max="30" required></p>
+                <p>สุนัขพันธ์เล็ก (6-11 กก.)     
+                   <input id="numsmallpet" type="number" name="smallpet" min="0" max="30" required></p> 
+                <p>แมว     
+                   <input id="numcat" type="number" name="cat" min="0" max="30" required></p>
+                <p><b>อาการ</b>
+                    ปกติ <input id="normal" type="number" name="symptom" value="ปกติ" required>
+                    ป่วย <input id="sick" type="number" name="symptom" value="ป่วย" required></p>
+                <p><b>ระยะเวลา ตั้งแต่</b>
+                <input id="day1" type="date" name="day1" value="" required> ถึง
+                <input id="day2" type="date" name="day2" value="" required></p>
+                <p><b>หมายเหตุ</b></p>
+                <textarea name="note" id="note"></textarea>
+            </div>
+            <hr>
+            <div id="span2">
+               <p>สรุปค่าบริการ<br>
+                ราคา</p>
+                <p><div id="price"></div>บาท</p>
+                <input id="confirm" type="submit" value="ยืนยัน">       
+            </div>    
+        </fieldset>
+    </form>
+</body>
+
+</html>
