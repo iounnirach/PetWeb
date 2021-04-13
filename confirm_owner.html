@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Confirm owner page</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='booking.css'>
+    <script src='booking.js'></script>
+</head>
+
+<body>
+    <form name="myForm" id="myForm" action="confirm_owner.html">
+        <h1>ยืนยันการลงทะเบียน</h1>
+        <fieldset>
+            <div id="span1">
+                <p><b>จำนวนที่ว่างสัตว์เลี้ยงคงเหลือ</b></p>
+                <p>สุนัขพันธ์ใหญ่ (12 กก.ขึ้นไป)     
+                   <p id="numbigpet_con"></p></p>
+                <p>สุนัขพันธ์เล็ก (6-11 กก.)     
+                   <p id="numsmallpet_con"></p></p> 
+                <p>แมว     
+                   <p id="numcat_con"></p></p> 
+                <p><b>สามารถรับอาการ</b><br>
+                    <p id="normal_con" name="normal_con" value="normal_con"></p>อาการปกติ <br>
+                    <p id="sick_con" name="sick_con" value="sick_con" required></p>อาการป่วย
+                <p><b>เวลาให้บริการ</b>
+                <p id="time1_con"  name="time1_con" required></p> ถึง
+                <p id="time2_con"  name="time2_con" required></p></p>
+                <p><b>วันที่ให้บริการ</b><br>
+                    <p id="monday_con"></p>
+                    <p id="tuesday_con"></p>
+                    <p id="wednesday_con"></p>
+                    <p id="thursday_con"></p>
+                    <p id="friday_con"></p>
+                    <p id="saturday_con"></p>
+                    <p id="sunday_con"></p>
+                <p><b>เบอร์โทรติดต่อ</b>
+                <p id="phone_con"></p></p>
+                <p><b>หมายเหตุ</b></p>
+                <p id="note_con"></p>
+            </div>
+            <hr>
+            <div id="span2">
+               <p>สรุปค่าบริการ<br>
+                ราคา</p>
+                <p><div id="price"></div>บาท</p>
+                <input id="confirm" type="submit" value="ยืนยัน">       
+            </div>    
+        </fieldset>
+    </form>
+</body>
+
+</html>
