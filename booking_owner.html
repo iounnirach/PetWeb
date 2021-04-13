@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Booking owner page</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='booking.css'>
+    <script src='booking.js'></script>
+</head>
+
+<body>
+    <form name="myForm" id="myForm" action="confirm_owner.html">
+        <h1>ลงทะเบียน</h1>
+        <fieldset>
+            <div id="span1">
+                <p><b>จำนวนที่ว่างสัตว์เลี้ยงคงเหลือ</b></p>
+                <p>สุนัขพันธ์ใหญ่ (12 กก.ขึ้นไป)     
+                   <input id="numbigpet" type="number" name="bigpet" min="0" max="30" required></p>
+                <p>สุนัขพันธ์เล็ก (6-11 กก.)     
+                   <input id="numsmallpet" type="number" name="smallpet" min="0" max="30" required></p> 
+                <p>แมว     
+                   <input id="numcat" type="number" name="cat" min="0" max="30" required></p>
+                <p><b>สามารถรับอาการ</b><br>
+                    <input type="checkbox" id="normal" name="normal" value="normal" required>
+                    <label for="normal"> อาการปกติ</label><br>
+                    <input type="checkbox" id="sick" name="sick" value="sick" required>
+                    <label for="sick"> อาการป่วย</label></p>
+                <p><b>เวลาให้บริการ</b>
+                <input id="time1" type="time" name="time1" required> ถึง
+                <input id="time2" type="time" name="time2" required></p>
+                <p><b>วันที่ให้บริการ</b><br>
+                    <input type="checkbox" id="monday" name="day" value="day" required>
+                    <label for="monday"> วันจันทร์</label><br>
+                    <input type="checkbox" id="tuesday " name="day" value="day" required>
+                    <label for="tuesday "> วันอังคาร</label><br>
+                    <input type="checkbox" id="wednesday " name="day" value="day" required>
+                    <label for="wednesday "> วันพุธ</label><br>
+                    <input type="checkbox" id="thursday" name="day" value="day" required>
+                    <label for="thursday"> วันพฤหัสบดี</label><br>
+                    <input type="checkbox" id="friday" name="day" value="day" required>
+                    <label for="friday"> วันศุกร์</label><br>
+                    <input type="checkbox" id="saturday" name="day" value="day" required>
+                    <label for="saturday"> วันเสาร์</label><br>
+                    <input type="checkbox" id="sunday" name="day" value="day" required>
+                    <label for="sunday"> วันอาทิตย์</label><br>
+                <p><b>เบอร์โทรติดต่อ</b>
+                <input type="tel" id="phone" name="phone" placeholder="0XX-XXX-XXXX" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" ></p>
+                <p><b>หมายเหตุ</b></p>
+                <textarea name="note" id="note"></textarea>
+            </div>
+            <hr>
+            <div id="span2">
+               <p>สรุปค่าบริการ<br>
+                ราคา</p>
+                <p><div id="price"></div>บาท</p>
+                <input id="confirm" type="submit" value="ยืนยัน">       
+            </div>    
+        </fieldset>
+    </form>
+</body>
+
+</html>
