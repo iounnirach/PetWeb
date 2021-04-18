@@ -12,31 +12,53 @@
 
 <body>
     <form name="myForm" id="myForm" action="confirm_guest.html">
+        <nav class="navbar">
+            <div class="logo">HOLD MY PET</div>
+            <a href="#" class="toggle-button">
+              <span class="line"></span>
+              <span class="line"></span>
+              <span class="line"></span>
+            </a>
+            <div class="navbar-links">
+              <ul>
+                <li><a href="#">หน้าหลัก</a></li>
+                <li><a href="#">ข้อความ</a></li>
+                <li class="dropdown">
+                  <a href="javascript:void(0)" class="dropbtn">โปรไฟล์ <img class="imgja" src="./menubar/down-gray.png" /></a>
+                  <div class="dropdown-content">
+                    <a href="#">แก้ไขโปรไฟล์</a>
+                    <a href="#">ออกจากระบบ</a>
+                  </div>
+                </li>
+        
+              </ul>
+            </div>
+          </nav>
+
         <h1>ทำการจอง</h1>
         <fieldset>
-            <div id="span1">
-                <p><b>จำนวน</b></p>
-                <p>สุนัขพันธ์ใหญ่ (12 กก.ขึ้นไป)     
-                   <input id="numbigpet" type="number" name="bigpet" min="0" max="30" required></p>
-                <p>สุนัขพันธ์เล็ก (6-11 กก.)     
-                   <input id="numsmallpet" type="number" name="smallpet" min="0" max="30" required></p> 
-                <p>แมว     
+            <div class="span1">
+                <p id="head1"><b>จำนวน</b></p>
+                <p id="topic1">สุนัขพันธ์ใหญ่ (12 กก.ขึ้นไป)     
+                   <input id="numbigpet" type="number" name="bigpet" min="0" max="30" required><br>
+                สุนัขพันธ์เล็ก (6-11 กก.)     
+                   <input id="numsmallpet" type="number" name="smallpet" min="0" max="30" required><br>
+                แมว     
                    <input id="numcat" type="number" name="cat" min="0" max="30" required></p>
-                <p><b>อาการ</b>
-                    ปกติ <input id="normal" type="number" name="symptom" value="ปกติ" required>
-                    ป่วย <input id="sick" type="number" name="symptom" value="ป่วย" required></p>
-                <p><b>ระยะเวลา ตั้งแต่</b>
-                <input id="day1" type="date" name="day1" value="" required> ถึง
+                <p id="head2"><b>จำนวนอาการสัตว์เลี้ยง</b></p>
+                    <p id="topic2">ปกติ <input id="normal" type="number" name="symptom" value="ปกติ" min="0" max="30" required><br>
+                    ป่วย <input id="sick" type="number" name="symptom" value="ป่วย" min="0" max="30" required></p>
+                <p id="head3"><b>ฝากเลี้ยงระยะเวลาตั้งแต่</b></p>
+                <p id="topic3"><input id="day1" type="date" name="day1" value="" required> ถึง
                 <input id="day2" type="date" name="day2" value="" required></p>
-                <p><b>หมายเหตุ</b></p>
-                <textarea name="note" id="note"></textarea>
+                <p id="head4"><b>หมายเหตุ</b></p>
+                <p id="topic4"></p><textarea name="note" id="note"></textarea></p>
             </div>
             <hr>
-            <div id="span2">
-               <p>สรุปค่าบริการ<br>
-                ราคา</p>
-                <p><div id="price"></div>บาท</p>
-                <input id="confirm" type="submit" value="ยืนยัน">       
+            <div class="span2">
+               <p id="head1"><b>สรุปค่าบริการ</b><br></p> 
+                <p id="topic1">ราคา<div id="price"></div>
+                <input id="confirm" type="submit" value="ยืนยัน"></p>     
             </div>    
         </fieldset>
     </form>

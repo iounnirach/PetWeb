@@ -12,26 +12,49 @@
 
 <body>
     <form name="myForm" id="myForm" action="confirm_owner.html">
+        <nav class="navbar">
+            <div class="logo">HOLD MY PET</div>
+            <a href="#" class="toggle-button">
+              <span class="line"></span>
+              <span class="line"></span>
+              <span class="line"></span>
+            </a>
+            <div class="navbar-links">
+              <ul>
+                <li><a href="#">หน้าหลัก</a></li>
+                <li><a href="#">ข้อความ</a></li>
+                <li class="dropdown">
+                  <a href="javascript:void(0)" class="dropbtn">โปรไฟล์ <img class="imgja" src="./menubar/down-gray.png" /></a>
+                  <div class="dropdown-content">
+                    <a href="#">แก้ไขโปรไฟล์</a>
+                    <a href="#">ออกจากระบบ</a>
+                  </div>
+                </li>
+        
+              </ul>
+            </div>
+          </nav>
+
         <h1>ลงทะเบียน</h1>
         <fieldset>
-            <div id="span1">
-                <p><b>จำนวนที่ว่างสัตว์เลี้ยงคงเหลือ</b></p>
-                <p>สุนัขพันธ์ใหญ่ (12 กก.ขึ้นไป)     
-                   <input id="numbigpet" type="number" name="bigpet" min="0" max="30" required></p>
-                <p>สุนัขพันธ์เล็ก (6-11 กก.)     
-                   <input id="numsmallpet" type="number" name="smallpet" min="0" max="30" required></p> 
-                <p>แมว     
+            <div class="span1">
+                <p id="head1"><b>จำนวนที่ว่างสัตว์เลี้ยงคงเหลือ</b></p>
+                <p id="topic1">สุนัขพันธ์ใหญ่ (12 กก.ขึ้นไป)     
+                   <input id="numbigpet" type="number" name="bigpet" min="0" max="30" required><br>
+                สุนัขพันธ์เล็ก (6-11 กก.)     
+                   <input id="numsmallpet" type="number" name="smallpet" min="0" max="30" required><br>
+                แมว     
                    <input id="numcat" type="number" name="cat" min="0" max="30" required></p>
-                <p><b>สามารถรับอาการ</b><br>
-                    <input type="checkbox" id="normal" name="normal" value="normal">
+                <p id="head2"><b>สามารถรับอาการ</b><br></p>
+                <p id="topic2"><input type="checkbox" id="normal" name="normal" value="normal">
                     <label for="normal"> อาการปกติ</label><br>
                     <input type="checkbox" id="sick" name="sick" value="sick">
                     <label for="sick"> อาการป่วย</label></p>
-                <p><b>เวลาให้บริการ</b>
-                <input id="time1" type="time" name="time1" required> ถึง
+                <p id="head3"><b>เวลาให้บริการ</b></p>
+                <p id="topic3"><input id="time1" type="time" name="time1" required> ถึง
                 <input id="time2" type="time" name="time2" required></p>
-                <p><b>วันที่ให้บริการ</b><br>
-                    <input type="checkbox" id="monday" name="day" value="day" >
+                <p id="head4"><b>วันที่ให้บริการ</b><br></p>
+                    <p id="topic4"><input type="checkbox" id="monday" name="day" value="day" >
                     <label for="monday"> วันจันทร์</label><br>
                     <input type="checkbox" id="tuesday " name="day" value="day" >
                     <label for="tuesday "> วันอังคาร</label><br>
@@ -44,18 +67,17 @@
                     <input type="checkbox" id="saturday" name="day" value="day" >
                     <label for="saturday"> วันเสาร์</label><br>
                     <input type="checkbox" id="sunday" name="day" value="day" >
-                    <label for="sunday"> วันอาทิตย์</label><br>
-                <p><b>เบอร์โทรติดต่อ</b>
-                <input type="tel" id="phone" name="phone" placeholder="0XX-XXX-XXXX" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" ></p>
-                <p><b>หมายเหตุ</b></p>
+                    <label for="sunday"> วันอาทิตย์</label><br></p>
+                <p id="head5"><b>เบอร์โทรติดต่อ</b></p>
+                    <p id="topic5"><input type="tel" id="phone" name="phone" placeholder="0XX-XXX-XXXX" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" ></p>
+                <p ><b>หมายเหตุ</b></p>
                 <textarea name="note" id="note"></textarea>
             </div>
             <hr>
-            <div id="span2">
-               <p>สรุปค่าบริการ<br>
-                ราคา</p>
-                <p><div id="price"></div>บาท</p>
-                <input id="confirm" type="submit" value="ยืนยัน">       
+            <div class="span2">
+               <p id="head1"><b>สรุปค่าบริการ</b><br></p> 
+               <p id="topic1">ราคา<div id="price"></div>
+               <input id="confirm" type="submit" value="ยืนยัน"></p>       
             </div>    
         </fieldset>
     </form>
