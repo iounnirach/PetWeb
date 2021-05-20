@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>Register</title>
+  <title>Login</title>
   <meta charset="UTF-8">
   <meta name='viewport' content='width=device-width,initial-scale'>
   <link rel='stylesheet' type='text/css' href='Decor2.css'>
@@ -22,31 +22,33 @@
       <div class="navbar-links">
         <ul>
           <li><a href="#">หน้าหลัก</a></li>
-          <li><a href="#">ข้อความ</a></li>
-          <li><a href="register.html">ลงทะเบียน</a></li>
-          <li><a href="login.html">ล็อกอิน</a></li>
+        <li><a href="#">โรงแรมของฉัน</a></li>
+        <li><a href="#">ประวัติ</a></li>
+        <li><a href="login.html">เข้าสู่ระบบ</a></li>
+        <li><a href="register.html">ลงทะเบียน</a></li>
         </ul>
       </div>
     </nav>
   </header>
 
   <div >
-    <h2>ล็อกอิน</h2>
-    <form name="myLogin" id="myLogin">
-      <fieldset>
-        E-mail:
-        <input type="email" name="email" class="email" size="47" required>
+    <h2>เข้าสู่ระบบ</h2>
+    <form name="myLogin" id="myLogin" method="POST" action="auth">
+      <fieldset> E-mail:
+        <input type="email" name="email" class="email"  required>
         <br>
         <div class="center"></div>
         รหัสผ่าน:
-        <input type="password" name="password" required>
+        <input type="password" name="password" class="password" required>
         <br>
         <div class="center"></div>
 
-        <div class="center"><input class="button" type="submit" value="ยืนยัน"></div>
+        <div class="center"><input class="button" type="submit" value="เข้าสู่ระบบ"></div>
       </fieldset>
+       
     </form>
   </div>
+  <footer></footer>
 </body>
 
 </html>
