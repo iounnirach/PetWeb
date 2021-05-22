@@ -4,7 +4,10 @@ body {
     margin: 0px;
     font-family: 'Roboto', sans-serif;
 }
-
+.piclogo{
+    width: 29px;
+    margin: 0px;
+}
 footer {
     position: fixed;
     left: 0;
@@ -35,7 +38,7 @@ h4{
     font-size: 10px;
     margin: 5px 0px 0px 60px;
 }
-input.email, input.password, input.firstname, input.lastname, input.tel {
+input.mail, input.password, input.firstname, input.lastname, input.tell ,input.FB{
     margin-top: 15px;
     margin-left: 2px;
     height: 30px;
@@ -43,11 +46,11 @@ input.email, input.password, input.firstname, input.lastname, input.tel {
     border: 1px solid #707070;
 }
 
-input.email {
-    width: 88%;
+input.mail,input.FB {
+    width: 70%;
 }
 
-input.firstname, .lastname ,.password,.tel {
+input.firstname, .lastname ,.password,.tell {
     width: 40%;
 }
 
@@ -231,12 +234,30 @@ li.dropdown {
     form {
         width: 80%;
     }
-    input.email, input.password, input.firstname, input.lastname, input.tel {
+    input.mail, input.password, input.firstname, input.lastname, input.tell ,input.FB{
         width: 100%;
         margin-top: 5px;
         margin-bottom: 5px;
     }
     h4{
         margin: 0px 0px 5px 0px
+    }
+}
+/* success_regist */
+.success_regist{
+    width: 100%;
+    font-size: 30px;
+    font-weight: bold;
+    color: #B4753E;
+    margin: auto;
+    margin-top:230px;
+    text-align: center;
+}
+.success_regist a{
+    color: #B4753E;
+}
+@media screen and (max-width:410px){
+    .success_regist {
+        font-size: 20px;
     }
 }

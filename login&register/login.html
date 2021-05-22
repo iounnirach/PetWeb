@@ -3,8 +3,9 @@
 <head>
   <title>Login</title>
   <meta charset="UTF-8">
-  <meta name='viewport' content='width=device-width,initial-scale'>
-  <link rel='stylesheet' type='text/css' href='Decor2.css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' type='text/css' href='decor.css'>
+  <link rel="icon" type="image/png" href="img/paw3.png" sizes="16x16" />
   <script src="login.js" defer></script>
 </head>
 
@@ -12,7 +13,7 @@
   <header>
     <nav class="navbar">
       <div class="logo">
-        HOLD MY PET
+        HOLD MY PET <img src="img/pawbig.png" class="piclogo">
       </div>
       <a href="#" class="toggle-button">
         <span class="line"></span>
@@ -21,21 +22,20 @@
       </a>
       <div class="navbar-links">
         <ul>
-          <li><a href="#">หน้าหลัก</a></li>
-        <li><a href="#">โรงแรมของฉัน</a></li>
-        <li><a href="#">ประวัติ</a></li>
-        <li><a href="login.html">เข้าสู่ระบบ</a></li>
-        <li><a href="register.html">ลงทะเบียน</a></li>
+          <li><a href="home.html">หน้าหลัก</a></li>
+          <li><a href="#">โรงแรมของฉัน</a></li>
+          <li><a href="#">ประวัติ</a></li>
+          <li><a href="login.html">เข้าสู่ระบบ</a></li>
+          <li><a href="register.html">ลงทะเบียน</a></li>
         </ul>
       </div>
     </nav>
-  </header>
 
   <div >
     <h2>เข้าสู่ระบบ</h2>
-    <form name="myLogin" id="myLogin" method="POST" action="auth">
+    <form name="loginform" id="loginform" method="POST" action="/login">
       <fieldset> E-mail:
-        <input type="email" name="email" class="email"  required>
+        <input type="email" name="mail" class="mail"  required>
         <br>
         <div class="center"></div>
         รหัสผ่าน:
@@ -43,7 +43,7 @@
         <br>
         <div class="center"></div>
 
-        <div class="center"><input class="button" type="submit" value="เข้าสู่ระบบ"></div>
+        <div class="center"><input class="button" type="submit" id="login_btn" value="เข้าสู่ระบบ"></div>
       </fieldset>
        
     </form>

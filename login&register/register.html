@@ -4,14 +4,15 @@
   <title>Register</title>
   <meta charset="UTF-8">
   <meta name='viewport' content='width=device-width,initial-scale'>
-  <link rel='stylesheet' type='text/css' href='Decor2.css'>
+  <link rel='stylesheet' type='text/css' href='decor.css'>
+  <link rel="icon" type="image/png" href="img/paw3.png" sizes="16x16" />
   <script src="register.js" defer></script>
 </head>
 
 <body>
   <nav class="navbar">
     <div class="logo">
-      HOLD MY PET
+      HOLD MY PET <img src="img/pawbig.png" class="piclogo">
     </div>
     <a href="#" class="toggle-button">
       <span class="line"></span>
@@ -20,43 +21,41 @@
     </a>
     <div class="navbar-links">
       <ul>
-        <li><a href="#">หน้าหลัก</a></li>
+        <li><a href="home.html">หน้าหลัก</a></li>
         <li><a href="#">โรงแรมของฉัน</a></li>
         <li><a href="#">ประวัติ</a></li>
         <li><a href="login.html">เข้าสู่ระบบ</a></li>
         <li><a href="register.html">ลงทะเบียน</a></li>
-
       </ul>
     </div>
   </nav>
 
   <div>
     <h2>ลงทะเบียน</h2>
-    <form name="myForm" id="myForm" action="auth" method="POST">
-      <fieldset> ชื่อ:
+    <form name="registerform" id="registerform" action="/register" method="POST">
+      <fieldset> 
+        ชื่อ:
         <input type="text" name="firstname" class="firstname" required>
         นามสกุล:
         <input type="text" name="lastname" class="lastname" required>
         <br> 
-
         E-mail:
-        <input type="email" name="email" class="email" required>
+        <input type="email" name="mail" class="mail" required>
         <br>
-
         เบอร์โทรศัพท์:
-        <input type="text" name="tel" class="tel" required>
+        <input type="text" name="tell" class="tell" required>
         <br>
-        
+        Link-Facebook:
+        <input type="text" name="FB" class="FB" required>
+        <br> 
         รหัสผ่าน:
-        <input type="text" name="password"class="password" required>
+        <input type="text" name="password" class="password" id="password" min="8" required>
         <br><h4>(อย่างน้อย 8 ตัวอักษร)</h4>
-      
         ยืนยันรหัสผ่าน:
-        <input type="text" name="re_password"class="password" required>
+        <input type="text" name="re_password"class="password" id="re_password" required>
         <br>
-
         <div class="center">
-          <input class="button" type="submit" value="ลงทะเบียน">
+          <input class="button" type="submit" id="submit_btn" value="ลงทะเบียน">
         </div>
       </fieldset>
     </form>
