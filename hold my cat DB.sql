@@ -1,0 +1,11 @@
+CREATE DATABASE HOLD_MY_CAT;
+CREATE TABLE HOLD_MY_CAT.USER_PROFILE(
+	user_id 	INT 			AUTO_INCREMENT,
+    name 		VARCHAR(50) 	NOT NULL,
+    lastname 	VARCHAR(50) 	NOT NULL,
+    mail 		VARCHAR(50) 	NOT NULL,
+    tell 		INT 			NOT NULL,
+    linkFB 		VARCHAR(100) 	NOT NULL,
+    password 	VARCHAR(20) 	NOT NULL,
+    PRIMARY KEY (user_id)
+);
