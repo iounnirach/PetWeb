@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="img/pawbig.png" sizes="16x16" />
+    <link rel="stylesheet" href="home.css">
+    <script src="home.js" defer></script>
+    <title>HOLD MY PET</title>
+</head>
+<body>
+    <div class="container">
+        <div id="header">
+            <nav class="navbar">
+                <div class="logo">
+                    HOLD MY PET <img src="img/pawbig.png" class="piclogo">
+                </div> 
+                <a href="#" class="toggle-button">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </a>
+                <div class="navbar-links">
+                    <ul>
+                        <li><a href="home.html">หน้าหลัก</a></li>
+                        <li><a href="#">โรงแรมของฉัน</a></li>
+                        <li><a href="#">ประวัติ</a></li>
+                        <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn">โปรไฟล์ <img class="imgja" src="img/icondown.png" /></a>
+                            <div class="dropdown-content">
+                                <a href="#">แก้ไขโปรไฟล์</a>
+                                <a href="/logout">ออกจากระบบ</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+
+        <div id="main">
+            <div class="searchLeft">
+                <h3>เลือกตำเเหน่งให้บริการ</h3>
+                <input type="text" name="search" id="search">
+                <h3>หรือคลิกที่นี่ เพื่อหาโรงเเรมสัตว์เลี้ยงที่ใกล้ท่านที่สุด</h3>
+                
+                <div class="blogSearch">
+                    <div class="blog">
+
+                        <div class="blogText">
+                            <h4><span id="firstname-Review">fistname</span> <span id="lastname-Review">lastname</span> (<span id="score">คะแนน</span>)</h4>
+                            <h3>จำนวนที่รองรับต่อวัน : แมว <span id="catnumber"></span> ตัว</h3>
+                            <h3>อาการที่รองรับ : <span id="symptom">ปกติ</span></h3>
+                            <h3><span id="location"></span>bangkok Nonthaburi 11130</h3>
+                        </div>
+                        <div class="blogBtn">
+                            <button id="info" class="info" onclick="ShowInfo()">รายละเอียด</button>
+                            <a id="booking" href="#"><button class="booking" >จอง</button></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="searchRight">
+                <div class="mapping"></div>
+                <iframe id="myMap" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3874.2308177592495!2d100.39439131491466!3d13.825173990299962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQ5JzMwLjYiTiAxMDDCsDIzJzQ3LjciRQ!5e0!3m2!1sth!2sth!4v1618053000774!5m2!1sth!2sth" 
+                allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+        <div id="footer">      
+            <footer>
+            </footer>
+        </div>
+
+        <div class="bgShow"id="bgShow">
+            <div class="ShowInfo">
+                <div id="Close" onclick="CloseInfo()"><img class="cancel" id="cancel" src="img/cancel.png"></div>
+                <div class="grid-ShowInfo">
+                    <div id="left">
+                        <div id="HostInfo">
+                            <bigfont><span id="firstname">fistname</span> <span id="lastname">lastname</span></bigfont>
+                            <h3>ติดต่อ : <span id="tell">เบอร์</span></h3>
+                            <h3>คะแนนรีวิว : (<span id="score">คะแนน</span>)</h3>
+                            <br>
+                            <!-- <h3>วันที่ให้บริการ : <span id="tell"></span></h3> -->
+                            <h3>จำนวนที่รองรับต่อวัน : แมว <span id="catnumber"></span> ตัว</h3>
+                            <h3>หมายเหตุ : <span id="hotel_note"></span></h3>
+                            <div class="button-HostInfo">
+                                <button class="Link-FB"><a id="Link-FB" target="_blank"
+                                        href="https://www.facebook.com/tangkwa.kusaram/">ติดต่อ</a></button>
+                                <button class="booking"><a id="booking" href="#">จอง</a></button>
+                            </div>
+                        </div>
+                        <div id="review">
+                            <bigfont>รีวิว</bigfont>
+    
+                            <div class="Review">
+                                <h4><span id="firstname-Review">fistname</span> <span id="lastname-Review">lastname</span>
+                                    (<span class="score-Review">คะแนน</span>)</h4>
+                                <h5><span id="review_note">รีวิว</span></h5>
+                            </div>
+                            <!-- ตัวอย่างรีวิว ลบทิ้งได้ -->
+                            <div class="Review">
+                                <h4><span id="firstname-Review">fistname</span> <span id="lastname-Review">lastname</span>
+                                    (<span class="score-Review">คะแนน</span>)</h4>
+                                <h5><span id="review_note">รีวิว</span></h5>
+                            </div>
+
+                            <div class="Review">
+                                <h4><span id="firstname-Review">fistname</span> <span id="lastname-Review">lastname</span>
+                                    (<span class="score-Review">คะแนน</span>)</h4>
+                                <h5><span id="review_note">รีวิว</span></h5>
+                            </div>
+                            <!-- ตัวอย่างรีวิว -->
+                        </div>
+                    </div>
+    
+                    <div id="right">
+                        <div class="mapping"></div>
+                        <iframe id="myMap"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3874.2308177592495!2d100.39439131491466!3d13.825173990299962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQ5JzMwLjYiTiAxMDDCsDIzJzQ3LjciRQ!5e0!3m2!1sth!2sth!4v1618053000774!5m2!1sth!2sth"
+                            allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+
+        
+    </div>
+</body>
+</html>
