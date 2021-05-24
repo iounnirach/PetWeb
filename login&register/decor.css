@@ -16,14 +16,29 @@ footer {
     height: 40px;
     background-color: #FFE8D5;
 }
-
 h2 {
     text-align: center;
     margin: 2%;
     font-size: 20px;
     color: #B4753E;
 }
-
+.grid{
+    grid-template-columns: 20% auto;
+    grid-gap:10px;
+    display: grid;
+}
+topic{
+    grid-column: 1/2;
+}
+input,h4{
+    grid-column: 2/3;
+    margin: 0%;
+    border-radius: 10px;
+    height: 30px;
+}
+input{
+    border: 1px solid #707070;
+}
 form {
     font-size: 15px;
     font-size: 90%;
@@ -36,30 +51,8 @@ form {
 }
 h4{
     font-size: 10px;
-    margin: 5px 0px 0px 60px;
 }
-input.mail, input.password, input.firstname, input.lastname, input.tell ,input.FB{
-    margin-top: 15px;
-    margin-left: 2px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid #707070;
-}
-
-input.mail,input.FB {
-    width: 70%;
-}
-
-input.firstname, .lastname ,.password,.tell {
-    width: 40%;
-}
-
-fieldset {
-    border: none;
-}
-
 /* ปุ่มในform */
-
 .button {
     height: 42px;
     width: auto;
@@ -68,16 +61,19 @@ fieldset {
     font-size: 15px;
     color: white;
     padding: 1px 20px;
-    
-}
-
-.button:hover {
+    display: block;
+    margin: auto;
+    border: none;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 }
-
+.button:hover {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0);
+    background-color: #B4753E;
+    color: black;
+    /* border: none; */
+}
 .center {
     text-align: center;
-    margin: auto;
     margin-top: 2%;
 }
 
@@ -92,13 +88,11 @@ fieldset {
     color: #B4753E;
     height: 55px;
 }
-
 .logo {
     font-size: 30px;
     margin: 10px;
     margin-left: 20px;
 }
-
 .navbar-links ul {
     /* พื้นที่ทั้งหมดของlinks */
     margin: 0px;
@@ -106,8 +100,8 @@ fieldset {
     padding: 0px;
     display: flex;
 }
-
 @media screen and (min-width:861px) {
+  
     .navbar-links li {
         /* ปุ่ม */
         width: 117px;
@@ -117,14 +111,14 @@ fieldset {
         border-radius: 30px;
         text-align: center;
         /* border: 1px solid #707070; */
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
         border: none;
     }
     .navbar-links li:hover {
         background-color: #B4753E;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0);
     }
 }
-
 .navbar-links li a {
     /* ข้างในปุ่ม ex.สีตัวอักษร */
     text-decoration: none;
@@ -132,13 +126,6 @@ fieldset {
     padding: 10px;
     display: inline-block;
 }
-
-/* .navbar-links a:hover {
-    color: white;
-} */
-
-/* ปุ่มตอนย่อ */
-
 .toggle-button {
     position: absolute;
     top: 16px;
@@ -149,19 +136,15 @@ fieldset {
     width: 30px;
     height: 21px;
 }
-
 .toggle-button .line {
     height: 3px;
     width: 100%;
     background-color: #B4753E;
 }
-
 /* dropdowm */
-
 li.dropdown {
     display: inline-block;
 }
-
 .dropdown-content {
     display: none;
     position: absolute;
@@ -170,22 +153,19 @@ li.dropdown {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
-
 .dropdown-content a {
     text-decoration: none;
     display: block;
     text-align: left;
 }
-
 .dropdown-content a:hover {
     color: #B4753E;
 }
-
 .dropdown:hover .dropdown-content {
     display: block;
 }
-
-@media screen and (max-width:860px) {
+/* responsive */
+@media screen and (max-width:900px) {
     .logo {
         margin: 10px;
     }
@@ -223,24 +203,22 @@ li.dropdown {
         color: #B4753E;
     }
 }
-
 @media screen and (max-width:659px) {
     form {
         width: 90%;
     }
 }
-
 @media screen and (max-width:525px) {
+    .grid{
+        grid-template-columns: 100%;
+        grid-gap:2px;
+    }
+    topic,input,h4{
+        grid-column: 1/2;
+        display: block;
+    }
     form {
         width: 80%;
-    }
-    input.mail, input.password, input.firstname, input.lastname, input.tell ,input.FB{
-        width: 100%;
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-    h4{
-        margin: 0px 0px 5px 0px
     }
 }
 /* success_regist */

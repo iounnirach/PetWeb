@@ -33,31 +33,34 @@
   <div>
     <h2>ลงทะเบียน</h2>
     <form name="registerform" id="registerform" action="/register" method="POST">
-      <fieldset> 
-        ชื่อ:
+      <div class="grid">
+        <topic>ชื่อ:</topic>
         <input type="text" name="firstname" class="firstname" required>
-        นามสกุล:
+        <topic>นามสกุล:</topic>
         <input type="text" name="lastname" class="lastname" required>
-        <br> 
-        E-mail:
+        
+        <topic>E-mail:</topic>
         <input type="email" name="mail" class="mail" required>
-        <br>
-        เบอร์โทรศัพท์:
+        
+        <topic>เบอร์โทรศัพท์:</topic>
         <input type="text" name="tell" class="tell" required>
-        <br>
-        Link-Facebook:
+      
+        <topic>Link-Facebook:</topic>
         <input type="text" name="FB" class="FB" required>
-        <br> 
-        รหัสผ่าน:
+        
+        <topic>รหัสผ่าน:</topic>
         <input type="text" name="password" class="password" id="password" min="8" required>
-        <br><h4>(อย่างน้อย 8 ตัวอักษร)</h4>
-        ยืนยันรหัสผ่าน:
+        <h4>(อย่างน้อย 8 ตัวอักษร)</h4>
+        <topic>ยืนยันรหัสผ่าน:</topic>
         <input type="text" name="re_password"class="password" id="re_password" required>
-        <br>
+        
+      </div>
+        
+        
         <div class="center">
           <input class="button" type="submit" id="submit_btn" value="ลงทะเบียน">
         </div>
-      </fieldset>
+      
     </form>
   </div>
   <footer>

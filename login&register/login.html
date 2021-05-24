@@ -31,24 +31,25 @@
       </div>
     </nav>
 
-  <div >
-    <h2>เข้าสู่ระบบ</h2>
-    <form name="loginform" id="loginform" method="POST" action="/login">
-      <fieldset> E-mail:
-        <input type="email" name="mail" class="mail"  required>
-        <br>
-        <div class="center"></div>
-        รหัสผ่าน:
-        <input type="password" name="password" class="password" required>
-        <br>
-        <div class="center"></div>
+    <div>
+      <h2>เข้าสู่ระบบ</h2>
+      <form name="loginform" id="loginform" method="POST" action="/login">
+        <div class="grid">
+          <topic>E-mail:</topic>
+          <input type="email" name="mail" class="mail" required>
+          <br>
+          <div class="center"></div>
+          <topic>รหัสผ่าน:</topic>
+          <input type="password" name="password" class="password" required>
+          <br>
+          <div class="center"></div>
 
-        <div class="center"><input class="button" type="submit" id="login_btn" value="เข้าสู่ระบบ"></div>
-      </fieldset>
-       
-    </form>
-  </div>
-  <footer></footer>
+          <div class="center"><input class="button" type="submit" id="login_btn" value="เข้าสู่ระบบ"></div>
+          </fieldset>
+        </div>
+      </form>
+    </div>
+    <footer></footer>
 </body>
 
 </html>
