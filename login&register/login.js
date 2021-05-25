@@ -5,13 +5,16 @@ toggleButton.addEventListener('click', () => {
     nav.classList.toggle('active');
 })
 
-window.onload = loginLoad;
+window.onload = pageLoad;
 
-function loginLoad() {
+function pageLoad() {
 	const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
 	if (urlParams.get("error") == 2) {
 		alert("Username or Password is incorrect!");
+	}
+	else if (urlParams.get("error") == 3) {
+		alert("Cannot login!");
 	}
 }
 

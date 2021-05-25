@@ -87,7 +87,6 @@ h4{
 }
 
 /* menu-bar */
-
 .navbar {
     /* bar */
     display: flex;
@@ -139,10 +138,6 @@ h4{
     display: inline-block;
 }
 
-/* .navbar-links a:hover {
-    color: white;
-} */
-
 /* ปุ่มตอนย่อ */
 
 .toggle-button {
@@ -191,7 +186,7 @@ li.dropdown {
     display: block;
 }
 
-@media screen and (max-width:903px) {
+@media screen and (max-width:860px) {
     .logo {
         margin: 10px;
     }
@@ -313,23 +308,5 @@ li.dropdown {
     }
     form {
         width: 80%;
-    }
-}
-/* success_regist */
-.success_regist{
-    width: 100%;
-    font-size: 30px;
-    font-weight: bold;
-    color: #B4753E;
-    margin: auto;
-    margin-top:230px;
-    text-align: center;
-}
-.success_regist a{
-    color: #B4753E;
-}
-@media screen and (max-width:410px){
-    .success_regist {
-        font-size: 20px;
     }
 }
