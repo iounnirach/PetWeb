@@ -25,6 +25,9 @@ h2 {
     font-size: 20px;
     color: #B4753E;
 }
+.user_id{
+    margin-bottom: 10px;
+}
 #loginform>.grid{
     grid-template-columns: 15% auto;
     grid-gap:10px;

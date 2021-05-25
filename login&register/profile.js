@@ -25,6 +25,9 @@ function pageLoad() {
     getprofile_user();
     document.getElementById('save_btn').onclick = profile_update;
 
+    const user_id=getCookie('user_id');
+    document.getElementById('user_id').innerHTML=user_id;
+
     const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
 	if (urlParams.get("error") == 1) {
