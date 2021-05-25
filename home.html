@@ -49,14 +49,14 @@
                     <div class="blog">
 
                         <div class="blogText">
-                            <h4><span id="firstname-Review">fistname</span> <span id="lastname-Review">lastname</span> (<span id="score">คะแนน</span>)</h4>
-                            <h3>จำนวนที่รองรับต่อวัน : แมว <span id="catnumber"></span> ตัว</h3>
-                            <h3>อาการที่รองรับ : <span id="symptom">ปกติ</span></h3>
-                            <h3><span id="location"></span>bangkok Nonthaburi 11130</h3>
+                            <h4><span>fistname</span> <span>lastname</span> (<span>คะแนน</span>)</h4>
+                            <h3>จำนวนที่รองรับต่อวัน : แมว <span>5</span> ตัว</h3>
+                            <h3>อาการที่รองรับ : <span>ปกติ</span></h3>
+                            <h3>bangkok Nonthaburi 11130</h3>
                         </div>
                         <div class="blogBtn">
                             <button id="info" class="info" onclick="ShowInfo()">รายละเอียด</button>
-                            <a id="booking" href="#"><button class="booking" >จอง</button></a>
+                            <button class="booking">จอง</button>
                         </div>
 
                     </div>
@@ -65,8 +65,7 @@
             
             <div class="searchRight">
                 <div class="mapping"></div>
-                <iframe id="myMap" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3874.2308177592495!2d100.39439131491466!3d13.825173990299962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQ5JzMwLjYiTiAxMDDCsDIzJzQ3LjciRQ!5e0!3m2!1sth!2sth!4v1618053000774!5m2!1sth!2sth" 
-                allowfullscreen="" loading="lazy"></iframe>
+                <div id="map"></div>
             </div>
         </div>
         <div id="footer">      
@@ -90,28 +89,29 @@
                             <div class="button-HostInfo">
                                 <button class="Link-FB"><a id="Link-FB" target="_blank"
                                         href="https://www.facebook.com/tangkwa.kusaram/">ติดต่อ</a></button>
-                                <button class="booking"><a id="booking" href="#">จอง</a></button>
+                                <button class="booking">จอง</button>
                             </div>
                         </div>
                         <div id="review">
                             <bigfont>รีวิว</bigfont>
+                            <div id="reviewInfo">
+                                <div class="Review">
+                                    <h4><span>fistname</span> <span>lastname</span>
+                                        (<span class="score-Review">คะแนน</span>)</h4>
+                                    <h5><span>รีวิว</span></h5>
+                                </div>
+                                <!-- ตัวอย่างรีวิว ลบทิ้งได้ -->
+                                <div class="Review">
+                                    <h4><span>fistname</span> <span>lastname</span>
+                                        (<span class="score-Review">คะแนน</span>)</h4>
+                                    <h5><span>รีวิว</span></h5>
+                                </div>
     
-                            <div class="Review">
-                                <h4><span id="firstname-Review">fistname</span> <span id="lastname-Review">lastname</span>
-                                    (<span class="score-Review">คะแนน</span>)</h4>
-                                <h5><span id="review_note">รีวิว</span></h5>
-                            </div>
-                            <!-- ตัวอย่างรีวิว ลบทิ้งได้ -->
-                            <div class="Review">
-                                <h4><span id="firstname-Review">fistname</span> <span id="lastname-Review">lastname</span>
-                                    (<span class="score-Review">คะแนน</span>)</h4>
-                                <h5><span id="review_note">รีวิว</span></h5>
-                            </div>
-
-                            <div class="Review">
-                                <h4><span id="firstname-Review">fistname</span> <span id="lastname-Review">lastname</span>
-                                    (<span class="score-Review">คะแนน</span>)</h4>
-                                <h5><span id="review_note">รีวิว</span></h5>
+                                <div class="Review">
+                                    <h4><span>fistname</span> <span>lastname</span>
+                                        (<span class="score-Review">คะแนน</span>)</h4>
+                                    <h5><span>รีวิว</span></h5>
+                                </div>
                             </div>
                             <!-- ตัวอย่างรีวิว -->
                         </div>
@@ -127,8 +127,10 @@
     
             </div>
         </div>
-
-        
     </div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-cE5DFDO2ir695dGBOLOwHRg-sTv-x9Q&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
 </body>
 </html>
