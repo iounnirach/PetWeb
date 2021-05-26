@@ -63,13 +63,13 @@ function initMap() {
   }
 
 async function getDataHotel(){
-	const response = await fetch("\getDBReview");
+	const response = await fetch("\getDBHotel");
 	const content = await response.json();
 	showHotel(content);
 }
 
 function showHotel(data){
-	var showIDlayer = document.getElementById("blogSearch");
+	var blogSearch = document.getElementById("blogSearch");
     var keys = Object.keys(data);
 
     for(var i = 0; i < keys.length; i++){
@@ -79,12 +79,6 @@ function showHotel(data){
         containerText.className = "blogText";
         var containerBtn = document.createElement("div");
         containerBtn.className = "blogBtn";
-        // var containerItem = document.createElement("div");
-        // containerItem.className = "bg-light pt-5 pt-lg-0 pt-xl-5 pb-5";
-        // var containerDetail = document.createElement("div");
-        // containerDetail.className = "mt-4 p-4 text-start";
-        // var containerButton = document.createElement("div");
-        // containerButton.className = "d-grid px-4";
 
         var hotelName = document.createElement("h4");
         var catNumber = document.createElement("p");
@@ -103,28 +97,17 @@ function showHotel(data){
         catSymptom.innerHTML = "อาการที่รองรับ : " + data[keys[i]].symptom;
         location.innerHTML = data[keys[i]].province + data[keys[i]].district + data[keys[i]].subdistrict;
 
-        furniture_pic.src = "furniturePic/" + data[keys[i]].furniture_pic;
-        furniture_name.innerHTML = data[keys[i]].furniture_name;
-        size.innerHTML = "ขนาด : " + data[keys[i]].size + " ซม.";
-        wood.innerHTML = "เนื้อไม้ : " + data[keys[i]].wood;
-        price.innerHTML = data[keys[i]].price + " บาท";
-        detailLable.innerHTML = "รายละเอียดเพิ่มเติม :";
-        detail.innerHTML = data[keys[i]].detail;
-        cartBtn.innerHTML = "เพิ่มสินค้าลงตะกร้า";
 
-        container.appendChild(containerItem);
-        containerItem.appendChild(furniture_pic);
-        containerItem.appendChild(containerDetail);
-        containerDetail.appendChild(furniture_name);
-        containerDetail.appendChild(size);
-        containerDetail.appendChild(wood);
-        containerDetail.appendChild(detailLable);
-        containerDetail.appendChild(detail);
-        containerDetail.appendChild(price);
-        containerButton.appendChild(cartBtn);
-        containerItem.appendChild(containerButton);
+        container.appendChild(containerText);
+        container.appendChild(containerBtn);
+        containerText.appendChild(hotelName);
+        containerText.appendChild(catNumber);
+        containerText.appendChild(catSymptom);
+        containerText.appendChild(location);
+        containerBtn.appendChild(infoBtn);
+        containerBtn.appendChild(bookingBtn);
 
-        showIDlayer.appendChild(container);
+        blogSearch.appendChild(container);
 
         document.getElementById(data[keys[i]].FID).onclick = getToCart;
     }

@@ -43,7 +43,7 @@ const queryDB = (sql) => {
 
 ///////////////////// show all hotel /////////////////////
 
-app.get("/showDBChair", async (req,res) => {
+app.get("/getDBHotel", async (req,res) => {
     let sql = `SELECT * FROM HOLD_MY_CAT.hotel_profile`;
     let result = await queryDB(sql);
     result = Object.assign({},result);
