@@ -36,7 +36,6 @@ function pageLoad() {
 }
 
 const getprofile_user = (async () => {
-    console.log("1");
     await fetch('/profile_user').then((response) => {
         response.json().then((data) => {
             console.log(data);
@@ -51,26 +50,26 @@ const getprofile_user = (async () => {
         })
     })
 })
-const profile_update = (async (newdata) => {
-    await fetch("/editprofile", {
-        method: "POST",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            firstname: document.getElementById("firstname").value,
-            lastname: document.getElementById("lastname").value,
-            mail: document.getElementById("mail").value,
-            tell: document.getElementById("tell").value,
-            linkFB: document.getElementById("linkFB").value,
-            password: document.getElementById("password").value
-        })
-    }).then((response) => {
-        response.json().then((data) => {
-            alert(data);
-        });
-    }).catch((err) => {
-        alert(err);
-    });
-})
+// const profile_update = (async (newdata) => {
+//     await fetch("/editprofile", {
+//         method: "POST",
+//         headers: {
+//             'Accept': 'application/json',
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             firstname: document.getElementById("firstname").value,
+//             lastname: document.getElementById("lastname").value,
+//             mail: document.getElementById("mail").value,
+//             tell: document.getElementById("tell").value,
+//             linkFB: document.getElementById("linkFB").value,
+//             password: document.getElementById("password").value
+//         })
+//     }).then((response) => {
+//         response.json().then((data) => {
+//             alert(data);
+//         });
+//     }).catch((err) => {
+//         alert(err);
+//     });
+// })

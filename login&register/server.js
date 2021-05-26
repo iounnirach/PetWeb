@@ -38,7 +38,6 @@ const queryDB = (sql) => {
         })
     })
 }
-
 // register&login
 app.post('/register', async (req, res) => {
     let sql = `SELECT mail FROM user_profile WHERE mail = '${req.body.mail}'`;
@@ -83,7 +82,6 @@ app.post('/login', async (req, res) => {
         return res.redirect('login.html?error=3');
     }
 })
-
 // profile
 app.get('/profile_user', async (req, res) => {
     let sql = `SELECT * FROM user_profile WHERE user_id = '${req.cookies.user_id}'`;
@@ -91,7 +89,6 @@ app.get('/profile_user', async (req, res) => {
     console.log(result);
     res.end(JSON.stringify(result));
 })
-
 app.post('/editprofile', async (req, res) => {
     let sql = `SELECT mail FROM user_profile`;
     let result = await queryDB(sql);
@@ -110,26 +107,28 @@ app.post('/editprofile', async (req, res) => {
     }
 })
 
+
+
 //create hotel
 app.post('/createHotel', async (req, res) => {
-    let sql1 = `SELECT * FROM hotel_profile WHERE user_id="${req.cookies.user_id}"`;
+    let sql1 = `SELECT user_id FROM hotel_profile WHERE user_id = "${req.cookies.user_id}"`;
     let result1 = await queryDB(sql1);
     console.log("start create!")
-    if (result1[0].user_id !== "") {
-        return res.redirect('showhotel.html?error=1');
-    }
-    else if (result1[0].user_id == " ") {
+    if (result1 == "") {
+        console.log("haha");
         let sql = `INSERT INTO hotel_profile (user_id,hotel_name,cat_number,symptom,address,subdistrict,district,province,postal_code,latitude,longitude,hotel_note) 
     VALUES ("${req.cookies.user_id}","${req.body.hotel_name}","${req.body.cat_number}","${req.body.symptom}","${req.body.address}","${req.body.subdistrict}","${req.body.district}","${req.body.province}","${req.body.postal_code}","${req.body.latitude}","${req.body.longitude}","${req.body.hotel_note}")`
         let result = await queryDB(sql);
-        let sql2 = `SELECT * FROM hotel_profile WHERE user_id = '${req.cookies.user_id}'`;
+         let sql2 = `SELECT * FROM hotel_profile WHERE user_id = '${req.cookies.user_id}'`;
         let result2 = await queryDB(sql2);
         res.cookie('hotel_id', result2[0].hotel_id, { maxAge: 86400000 }, 'path=/');
         console.log("Createhotel succsess!");
-        return res.redirect("showhotel.html");
+        return res.redirect("myhotel.html");
+    }
+    else {
+        return res.redirect("myhotel.html?error=1");
     }
 })
-
 // show hotel
 app.get('/showhotel', async (req, res) => {
     let sql = `SELECT hotel_id,user_id,hotel_name,cat_number,symptom,address,subdistrict,district,province,postal_code,latitude,longitude,hotel_note FROM hotel_profile WHERE user_id = "${req.cookies.user_id}"`;
@@ -140,14 +139,18 @@ app.get('/showhotel', async (req, res) => {
     console.log(result);
     res.end(JSON.stringify(result));
 })
-
 // delete hotel
-app.delete('', async (req, res) => {
-    let sql = `DELETE FROM hotel_profile WHERE hotel_id="${req.cookies.hotel_id}"`;
+app.get('/deletehotel', async (req, res) => {
+    let sql = `DELETE FROM hotel_profile WHERE user_id="${req.cookies.user_id}"`;
     let result = await queryDB(sql);
     res.cookie('hotel_id', { maxAge: 0 }, 'path=/');
     console.log("Delete hotel!");
+    res.end(JSON.stringify("ha"));
+    return res.redirect("myhotel.html");
 })
+
+
+
 //logout
 app.get('/logout', (req, res) => {
     res.cookie('user_id', '', { maxAge: 0 }, 'path=/');
@@ -155,6 +158,9 @@ app.get('/logout', (req, res) => {
     res.cookie('hotel_id', { maxAge: 0 }, 'path=/');
     return res.redirect('login.html');
 })
+
+
+
 app.listen(port, hostname, () => {
     console.log(`Server running at   http://${hostname}:${port}/register.html`);
 });

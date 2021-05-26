@@ -1,0 +1,140 @@
+<html>
+
+<head>
+    <title>My hotel</title>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width,initial-scale'>
+    <link rel="icon" type="image/png" href="img/pawbig.png" sizes="16x16" />
+    <link rel='stylesheet' type='text/css' href='myhotel.css'>
+    <script src="myhotel.js" defer></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">HOLD MY PET <img src="img/pawbig.png" class="piclogo"></div>
+        <a href="#" class="toggle-button">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </a>
+        <div class="navbar-links">
+            <ul>
+                <li><a href="home.html">หน้าหลัก</a></li>
+                <li><a href="showhotel.html">โรงแรมของฉัน</a></li>
+                <li><a href="#">ประวัติ</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">โปรไฟล์ <img class="icon_down"
+                            src="img/icondown.png" /></a>
+                    <div class="dropdown-content">
+                        <a href="profile.html">แก้ไขโปรไฟล์</a>
+                        <a href="/logout">ออกจากระบบ</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div id="myhotel">
+        <h2>สร้างโรงแรมของฉัน</h2>
+
+        <form name="myhotelform" id="myhotelform" action="/createHotel" method="POST">
+            <div class="grid">
+                <topic>ชื่อโรงแรม:</topic>
+                <input class="right" type="text" name="hotel_name" id="hotel_name" required>
+                <topic>จำนวนแมว (ตัว)</topic>
+                <input class="right" type="number" id="cat_number" name="cat_number" min=0>
+                <topic>รองรับอาการ</topic>
+                <div class="right">
+                    <input type="radio" id="symptom" name="symptom" value="ปกติ">ปกติ
+                    <input type="radio" id="symptom" name="symptom" value="ป่วย">ป่วย
+                    <input type="radio" id="symptom" name="symptom" value="ปกติและป่วย">ปกติและป่วย
+                </div>
+                <topic>ที่อยู่</topic>
+                <div class="right">รายละเอียดที่อยู่</div>
+                <input class="right" type="text" id="address" name="address">
+                <div class="grid-in">
+
+                    <div class="left">ตำบล<br><input type="text" name="subdistrict" class="subdistrict" id="subdistrict"
+                            required></div>
+
+                    <div class="right">อำเภอ<br><input class="right" type="text" name="district" class="district"
+                            id="district" required></div>
+
+                    <div class="left">จังหวัด<br><input class="left" type="text" name="province" class="province"
+                            id="province" required></div>
+
+                    <div class="right">รหัสไปรษณีย์<br><input class="right" type="text" name="postal_code"
+                            class="postal_code" id="postal_code" required></div>
+
+                    <div class="left">ละติจูด<br><input class="left" type="text" name="latitude" class="latitude"
+                            id="latitude" required></div>
+
+                    <div class="right">ลองจิจูด<br><input class="right" type="text" name="longitude" class="longitude"
+                            id="longitude" required></div>
+                </div>
+                <topic>หมายเหตุ:</topic>
+                <input class="right" type="text" name="hotel_note" id="hotel_note">
+            </div>
+            <div class="center">
+                <input class="button" type="submit" id="submit_btn" value="ยืนยัน">
+            </div>
+        </form>
+    </div>
+
+
+    <div id="ShowHotel">
+        <h2>โรงแรมของฉัน</h2>
+
+        <div class="detail_hotel">
+            
+            <div id="addhotel">สร้างโรงแรมของฉัน <img class="add" src="img/add2.png" onclick="goCreate()"></div>
+            <div class="grid">
+                Hotel id: <span id="hotel_id">-</span>
+                <topic>ชื่อโรงแรม:</topic>
+                <div class="right">
+                    <span id="show_hotel_name">-</span>
+                </div>
+                <topic>จำนวนแมว (ตัว)</topic>
+                <span class="right" id="show_cat_number">-</span>
+                <topic>รองรับอาการ</topic>
+                <div class="right">
+                    <span class="right" id="show_symptom">-</span>
+                </div>
+                <topic>ที่อยู่</topic>
+                <div class="right">รายละเอียดที่อยู่</div>
+                <span class="right" id="show_address">-</span>
+                <div class="grid-in">
+                    <div class="left">ตำบล<br>
+                        <span id="show_subdistrict">-</span>
+                    </div>
+
+                    <div class="right">อำเภอ<br>
+                        <span id="show_district">-</span>
+                    </div>
+
+                    <div class="left">จังหวัด<br>
+                        <span id="show_province">-</span>
+                    </div>
+
+                    <div class="right">รหัสไปรษณีย์<br>
+                        <span id="show_postal_code">-</span>
+                    </div>
+
+                    <div class="left">ละติจูด<br>
+                        <span id="show_latitude">-</span>
+                    </div>
+
+                    <div class="right">ลองจิจูด<br>
+                        <span id="show_longitude">-</span>
+                    </div>
+                </div>
+                <topic>หมายเหตุ:</topic>
+                <span class="right" id="show_hotel_note">-</span>
+            </div>
+            <input class="button" type="submit" id="cancel_btn"  value="ปิดบริการ">
+
+        </div>
+    </div>
+</body>
+<!-- onclick="createHotel()" -->
