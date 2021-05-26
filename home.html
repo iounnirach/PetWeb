@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="img/pawbig.png" sizes="16x16" />
     <link rel="stylesheet" href="home.css">
-    <script src="home.js" defer></script>
     <title>HOLD MY PET</title>
 </head>
 <body>
@@ -45,7 +44,7 @@
                 <input type="text" name="search" id="search">
                 <h3>หรือคลิกที่นี่ เพื่อหาโรงเเรมสัตว์เลี้ยงที่ใกล้ท่านที่สุด</h3>
                 
-                <div class="blogSearch">
+                <div class="blogSearch" id="blogSearch">
                     <div class="blog">
 
                         <div class="blogText">
@@ -55,7 +54,7 @@
                             <p>bangkok Nonthaburi 11130</p>
                         </div>
                         <div class="blogBtn">
-                            <button id="info" class="info" onclick="ShowInfo()">รายละเอียด</button>
+                            <button id="info" class="infoBtn" onclick="ShowInfo()">รายละเอียด</button>
                             <a id="booking" href="#"><button class="booking" >จอง</button></a>
                         </div>
 
@@ -79,13 +78,13 @@
                 <div class="grid-ShowInfo">
                     <div id="left">
                         <div id="HostInfo">
-                            <bigfont><span id="firstname">fistname</span> <span id="lastname">lastname</span></bigfont>
-                            <h3>ติดต่อ : <span id="tell">เบอร์</span></h3>
-                            <h3>คะแนนรีวิว : (<span id="score">คะแนน</span>)</h3>
+                            <bigfont><span id="hotelName"></span></bigfont>
+                            <h3>ติดต่อ : <span id="tell"></span></h3>
+                            <h3>คะแนนรีวิว : (<span id="score"></span>)</h3>
                             <br>
                             <!-- <h3>วันที่ให้บริการ : <span id="tell"></span></h3> -->
-                            <h3>จำนวนที่รองรับต่อวัน : แมว <span id="catnumber"></span> ตัว</h3>
-                            <h3>หมายเหตุ : <span id="hotel_note"></span></h3>
+                            <h3>จำนวนที่รองรับต่อวัน : แมว <span id="catNumber"></span> ตัว</h3>
+                            <h3>หมายเหตุ : <span id="hotelNote"></span></h3>
                             <div class="button-HostInfo">
                                 <button class="Link-FB"><a id="Link-FB" target="_blank"
                                         href="https://www.facebook.com/tangkwa.kusaram/">ติดต่อ</a></button>
@@ -132,5 +131,6 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-cE5DFDO2ir695dGBOLOwHRg-sTv-x9Q&callback=initMap&libraries=&v=weekly"
       async
     ></script>
+    <script src="home.js" defer></script>
 </body>
 </html>

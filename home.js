@@ -9,6 +9,7 @@ function pageload() {
     })
 
     initMap();
+    getDataHotel();
    
 }
 function ShowInfo() {
@@ -65,6 +66,7 @@ function initMap() {
 async function getDataHotel(){
 	const response = await fetch("\getDBHotel");
 	const content = await response.json();
+    console.log(content);
 	showHotel(content);
 }
 
@@ -87,16 +89,21 @@ function showHotel(data){
 
         var infoBtn = document.createElement("button");
         infoBtn.className = "infoBtn";
-        infoBtn.id = [data[keys[i]].hotel_id];
+        infoBtn.id = data[keys[i]].hotel_id;
+        infoBtn.innerHTML = "รายละเอียด";
+        infoBtn.onclick = getToHotelDetail;
         var bookingBtn = document.createElement("button");
         bookingBtn.className = "booking";
-        bookingBtn.id = [data[keys[i]].hotel_id];
+        bookingBtn.id = data[keys[i]].hotel_id;
+        bookingBtn.innerHTML = "จอง";
+        bookingBtn.onclick = getToHotelBooking;
 
-        hotelName.innerHTML = data[keys[i]].hotel_name;
+        hotelName.innerHTML = data[keys[i]].hotel_name +" "+ data[keys[i]].avg_score;
         catNumber.innerHTML = "จำนวนที่รองรับต่อวัน : แมว " + data[keys[i]].cat_number + " ตัว";
         catSymptom.innerHTML = "อาการที่รองรับ : " + data[keys[i]].symptom;
-        location.innerHTML = data[keys[i]].province + data[keys[i]].district + data[keys[i]].subdistrict;
+        location.innerHTML = data[keys[i]].province +" "+ data[keys[i]].district +" "+ data[keys[i]].subdistrict +" "+ data[keys[i]].postal_code;
 
+        blogSearch.appendChild(container);
 
         container.appendChild(containerText);
         container.appendChild(containerBtn);
@@ -106,30 +113,57 @@ function showHotel(data){
         containerText.appendChild(location);
         containerBtn.appendChild(infoBtn);
         containerBtn.appendChild(bookingBtn);
-
-        blogSearch.appendChild(container);
-
-        document.getElementById(data[keys[i]].FID).onclick = getToCart;
     }
 }
-
-async function getToCart(){
-    console.log(this.id);
-    writeCart(this.id);
+///////////////////// click booking button /////////////////////
+async function getToHotelBooking(){
+    // console.log(this.id);
+    hotelBooking_ID(this.id);
 }
-
-async function writeCart(FID){
-    console.log("Add furniture to cart server");
-    const response = await fetch("/addDBcart", {
+async function hotelBooking_ID(hotelID){
+    // console.log(hotelID);
+    const response = await fetch("/getHotelBooking_id", {
         method: "POST",
         headers:{
             'Accept':'application/json',
             'Content-Type':'application/json'
         },
         body: JSON.stringify({
-        post:FID}) // ส่งค่า FID ไปให้ server.js
+        post:hotelID}) // ส่งค่า hotelID ไปให้ server.js
     })
-    // const content = await response.json(); // ไม่ได้ใช้เนื่องจากไม่จำเป็นต้องเอาค่าที่ได้ไปทำอะไร
-    // console.log(content);
-    // showDataCart(content);
+}
+///////////////////// click detail button /////////////////////
+async function getToHotelDetail(){
+    // console.log(this.id);
+    hotelDetail_ID(this.id);
+}
+async function hotelDetail_ID(hotelID){
+    // console.log(hotelID);
+    const response = await fetch("/getHotelDetail", {
+        method: "POST",
+        headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+        post:hotelID}) // ส่งค่า hotelID ไปให้ server.js
+    })
+    const content = await response.json(); // นำค่าที่ได้ไปโชบน hotelDetail
+    console.log(content);
+    hotelDetail(content);
+}
+
+function hotelDetail(data){
+    document.getElementById("bgShow").style.display = "block";
+	var hotelName = document.getElementById("hotelName");
+    var tell = document.getElementById("tell");
+    var score = document.getElementById("score");
+    var catNumber = document.getElementById("catNumber");
+    var hotelNote = document.getElementById("hotelNote");
+
+    hotelName.innerHTML = data.hotel_name;
+    tell.innerHTML = data.tell;
+    score.innerHTML = data.avg_score;
+    catNumber.innerHTML = data.cat_number;
+    hotelNote.innerHTML = data.hotel_note;
 }

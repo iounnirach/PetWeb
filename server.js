@@ -44,7 +44,30 @@ const queryDB = (sql) => {
 ///////////////////// show all hotel /////////////////////
 
 app.get("/getDBHotel", async (req,res) => {
-    let sql = `SELECT * FROM HOLD_MY_CAT.hotel_profile`;
+    let sql = ` SELECT
+                hp.hotel_id,
+                hp.hotel_name,
+                re.avg_score,
+                hp.cat_number,
+                hp.symptom,
+                hp.subdistrict,
+                hp.district,
+                hp.province,
+                hp.postal_code,
+                hp.latitude,
+                hp.longitude,
+                hp.hotel_note
+                FROM HOLD_MY_CAT.user_profile as p
+                INNER JOIN HOLD_MY_CAT.hotel_profile as hp
+                ON p.user_id = hp.user_id
+                INNER JOIN
+                (
+                    SELECT hotel_id, TRUNCATE(AVG(score),2) as avg_score
+                    FROM HOLD_MY_CAT.review
+                    GROUP BY hotel_id
+                ) as re
+                ON hp.hotel_id = re.hotel_id
+                ORDER BY avg_score DESC`;
     let result = await queryDB(sql);
     result = Object.assign({},result);
     // console.log(result);
@@ -53,26 +76,39 @@ app.get("/getDBHotel", async (req,res) => {
 
 ///////////////////// show hotel detail /////////////////////
 
-app.post("/addDBcart", async (req,res) => {
-    let getCartID = req.body.post;
+app.post("/getHotelDetail", async (req,res) => {
+    let getHotelID = req.body.post;
     // console.log(getCartID);
-    let sql = `SELECT * FROM FROM HOLD_MY_CAT.hotel_profile WHERE hotel_id = ${getCartID}`;
+    let sql = ` SELECT 
+                hp.hotel_name,
+                p.tell,
+                p.linkFB,
+                TRUNCATE(AVG(re.score),2) AS avg_score,
+                hp.cat_number,
+                hp.symptom,
+                hp.latitude,
+                hp.longitude,
+                hp.hotel_note
+                FROM HOLD_MY_CAT.user_profile as p
+                INNER JOIN HOLD_MY_CAT.hotel_profile as hp
+                ON p.user_id = hp.user_id
+                INNER JOIN HOLD_MY_CAT.review as re
+                ON p.user_id = re.user_id
+                WHERE hp.hotel_id = ${getHotelID}`;
     let result = await queryDB(sql);
-    if(result.length > 0){
-        // sql = `SELECT quantity FROM OPEN_HOUSE_IDEA.cart WHERE furniture_id = ${getCartID} AND user_id = ${req.cookies.UID}`;
-        // result = await queryDB(sql);
-        // console.log(result);
-        sql = `UPDATE OPEN_HOUSE_IDEA.cart SET quantity= quantity + 1 WHERE furniture_id = ${getCartID} AND user_id = ${req.cookies.UID}`
-        result = await queryDB(sql);
-        sql = `SELECT quantity FROM OPEN_HOUSE_IDEA.cart WHERE furniture_id = ${getCartID} AND user_id = ${req.cookies.UID}`;
-        result = await queryDB(sql);
-        // console.log(result[0].quantity);
-        alert(`You are add ${result[0].quantity} furniture to cart`);
-        // alert('You are already add this furniture to cart');
-    }
-    else{
-        sql = `INSERT INTO OPEN_HOUSE_IDEA.cart (user_id, furniture_id, quantity) VALUES (${req.cookies.UID}, ${getCartID}, 1)`;
-        result = await queryDB(sql);
-        alert('Add this furniture to cart');
-    }
+    // result = Object.assign({},result);
+    console.log(result[0]);
+    res.json(result[0]);
+});
+
+///////////////////// click booking button /////////////////////
+
+app.post("/getHotelBooking_id", async (req,res) => {
+    let getHotelID = req.body.post;
+    res.cookie('hotel_id', getHotelID, 1);
+    res.redirect('/booking.html');
+});
+
+app.listen(port, hostname, () => {
+    console.log(`Server running at   http://${hostname}:${port}/`);
 });
