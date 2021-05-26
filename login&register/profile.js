@@ -23,15 +23,15 @@ function pageLoad() {
         nav.classList.toggle('active');
     })
     getprofile_user();
-    document.getElementById('save_btn').onclick = profile_update;
-
-    const user_id=getCookie('user_id');
-    document.getElementById('user_id').innerHTML=user_id;
+    // document.getElementById('save_btn').onclick = profile_update;
 
     const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
 	if (urlParams.get("error") == 1) {
 		alert("E-mailนี้ถูกใช้งานแล้ว");
+	}
+    else if (urlParams.get("success") == 1) {
+		alert("บันทึกโปรไฟล์สำเร็จ");
 	}
 }
 
@@ -39,6 +39,7 @@ const getprofile_user = (async () => {
     await fetch('/profile_user').then((response) => {
         response.json().then((data) => {
             console.log(data);
+            document.getElementById("user_id").innerHTML = data[0].user_id;
             document.getElementById("firstname").value = data[0].name;
             document.getElementById("lastname").value = data[0].lastname;
             document.getElementById("mail").value = data[0].mail;
@@ -50,26 +51,3 @@ const getprofile_user = (async () => {
         })
     })
 })
-// const profile_update = (async (newdata) => {
-//     await fetch("/editprofile", {
-//         method: "POST",
-//         headers: {
-//             'Accept': 'application/json',
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({
-//             firstname: document.getElementById("firstname").value,
-//             lastname: document.getElementById("lastname").value,
-//             mail: document.getElementById("mail").value,
-//             tell: document.getElementById("tell").value,
-//             linkFB: document.getElementById("linkFB").value,
-//             password: document.getElementById("password").value
-//         })
-//     }).then((response) => {
-//         response.json().then((data) => {
-//             alert(data);
-//         });
-//     }).catch((err) => {
-//         alert(err);
-//     });
-// })

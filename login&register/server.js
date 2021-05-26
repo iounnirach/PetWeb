@@ -92,14 +92,14 @@ app.get('/profile_user', async (req, res) => {
 app.post('/editprofile', async (req, res) => {
     let sql = `SELECT mail FROM user_profile`;
     let result = await queryDB(sql);
-    if (req.body.mail !== result[0].mail) {//เชคว่ามีอีเมลนี่ยัง ถ้าไม่มีเปลี่ยนเป็นเมลนั้นได้
+    if (req.body.mail !== result) {//เชคว่ามีอีเมลนี่ยัง ถ้าไม่มีเปลี่ยนเป็นเมลนั้นได้
         let sql = `UPDATE user_profile SET name ='${req.body.firstname}',lastname ='${req.body.lastname}',mail ='${req.body.mail}',tell ='${req.body.tell}',linkFB ='${req.body.linkFB}',password ='${req.body.password}' WHERE user_id = '${req.cookies.user_id}'`;
         let result = await queryDB(sql);
         console.log('Update profile');
         let sql2 = `SELECT mail FROM user_profile WHERE user_id = '${req.cookies.user_id}'`;
         let result2 = await queryDB(sql2);
         res.cookie('mail', result2[0].mail, { maxAge: 86400000 }, 'path=/');
-        return res.redirect('profile.html');
+        return res.redirect('profile.html?success=1');
     }
     else {
         console.log("This e-mail is already used!")
