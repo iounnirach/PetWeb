@@ -14,7 +14,7 @@ function pageLoad() {
 	const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
 	if (urlParams.get("error") == 1) {
-		alert("This e-mail is already used!");
+		alert("E-mailนี้ถูกใช้งานแล้ว");
 	}
 }
 
@@ -22,7 +22,7 @@ function checkpassword(){ //check pass&repass
 	var pass=document.forms["registerform"]["password"].value;
 	var re_pass=document.forms["registerform"]["re_password"].value;
 	if (pass !== re_pass) {  
-		alert("password and confirm password are not match!");
+		alert("กรอกรหัสผ่านไม่ตรงกัน");
         return false;  
     }
 }

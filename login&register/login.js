@@ -11,10 +11,10 @@ function pageLoad() {
 	const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
 	if (urlParams.get("error") == 2) {
-		alert("Username or Password is incorrect!");
+		alert("กรอกE-mailหรือรหัสผ่านผิด");
 	}
 	else if (urlParams.get("error") == 3) {
-		alert("Cannot login!");
+		alert("ไม่สามารถเข้าสู่ระบบได้ กรุณาลงทะเบียน");
 	}
 }
 

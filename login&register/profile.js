@@ -31,7 +31,7 @@ function pageLoad() {
     const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
 	if (urlParams.get("error") == 1) {
-		alert("This e-mail is already used!");
+		alert("E-mailนี้ถูกใช้งานแล้ว");
 	}
 }
 
