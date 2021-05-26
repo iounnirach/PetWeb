@@ -1,8 +1,8 @@
 
 window.onload = pageload;
 function pageload() {
-    const toggleButton = document.getElementsByClassName('toggle-button')[0]
-    const nav = document.getElementsByClassName('navbar-links')[0]
+    const toggleButton = document.getElementsByClassName('toggle-button')[0];
+    const nav = document.getElementsByClassName('navbar-links')[0];
 
     toggleButton.addEventListener('click', () => {
         nav.classList.toggle('active');
@@ -12,11 +12,15 @@ function pageload() {
     getDataHotel();
    
 }
-function ShowInfo() {
-    document.getElementById("bgShow").style.display = "block";
-}
+// function ShowInfo() {
+//     document.getElementById("bgShow").style.display = "block";
+// }
 function CloseInfo() {
     document.getElementById("bgShow").style.display = "none";
+    var removeReview = document.getElementsByClassName("Review");
+    while(removeReview.length > 0){
+        removeReview[0].parentNode.removeChild(removeReview[0]);
+    }
 }
 
 function initMap() {
@@ -115,27 +119,12 @@ function showHotel(data){
         containerBtn.appendChild(bookingBtn);
     }
 }
-///////////////////// click booking button /////////////////////
-async function getToHotelBooking(){
-    // console.log(this.id);
-    hotelBooking_ID(this.id);
-}
-async function hotelBooking_ID(hotelID){
-    // console.log(hotelID);
-    const response = await fetch("/getHotelBooking_id", {
-        method: "POST",
-        headers:{
-            'Accept':'application/json',
-            'Content-Type':'application/json'
-        },
-        body: JSON.stringify({
-        post:hotelID}) // ส่งค่า hotelID ไปให้ server.js
-    })
-}
+
 ///////////////////// click detail button /////////////////////
 async function getToHotelDetail(){
     // console.log(this.id);
     hotelDetail_ID(this.id);
+    hotelReview_ID(this.id);
 }
 async function hotelDetail_ID(hotelID){
     // console.log(hotelID);
@@ -149,11 +138,12 @@ async function hotelDetail_ID(hotelID){
         post:hotelID}) // ส่งค่า hotelID ไปให้ server.js
     })
     const content = await response.json(); // นำค่าที่ได้ไปโชบน hotelDetail
-    console.log(content);
+    // console.log(content);
     hotelDetail(content);
 }
 
 function hotelDetail(data){
+    console.log(data);
     document.getElementById("bgShow").style.display = "block";
 	var hotelName = document.getElementById("hotelName");
     var tell = document.getElementById("tell");
@@ -166,4 +156,58 @@ function hotelDetail(data){
     score.innerHTML = data.avg_score;
     catNumber.innerHTML = data.cat_number;
     hotelNote.innerHTML = data.hotel_note;
+}
+///////////////////// hotel review
+async function hotelReview_ID(hotelID){
+    // console.log(hotelID);
+    const response = await fetch("/getHotelReview", {
+        method: "POST",
+        headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+        post:hotelID}) // ส่งค่า hotelID ไปให้ server.js
+    })
+    const content = await response.json();
+    // console.log(content);
+    hotelReview(content);
+}
+
+function hotelReview(data){
+    var reviewInfo = document.getElementById("reviewInfo");
+    var keys = Object.keys(data);
+
+    for(var i = 0; i < keys.length; i++){
+        var containerReview = document.createElement("div");
+        containerReview.className = "Review";
+        var reviewName_score = document.createElement("h4");
+        var reviewNote = document.createElement("p");
+
+        reviewName_score.innerHTML = data[keys[i]].review_name + "(" + data[keys[i]].score + " คะเเนน" + ")";
+        reviewNote.innerHTML = data[keys[i]].review_note;
+
+        reviewInfo.appendChild(containerReview);
+
+        containerReview.appendChild(reviewName_score);
+        containerReview.appendChild(reviewNote);
+    }
+}
+
+///////////////////// click booking button /////////////////////
+async function getToHotelBooking(){
+    // console.log(this.id);
+    hotelBooking_ID(this.id);
+}
+async function hotelBooking_ID(hotelID){ // save cookie hotel_id
+    // console.log(hotelID);
+    const response = await fetch("/getHotelBooking_id", {
+        method: "POST",
+        headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+        post:hotelID}) // ส่งค่า hotelID ไปให้ server.js
+    })
 }

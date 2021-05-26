@@ -79,7 +79,8 @@ app.get("/getDBHotel", async (req,res) => {
 app.post("/getHotelDetail", async (req,res) => {
     let getHotelID = req.body.post;
     // console.log(getCartID);
-    let sql = ` SELECT 
+    let sql = ` SELECT
+                hp.hotel_id,
                 hp.hotel_name,
                 p.tell,
                 p.linkFB,
@@ -97,16 +98,34 @@ app.post("/getHotelDetail", async (req,res) => {
                 WHERE hp.hotel_id = ${getHotelID}`;
     let result = await queryDB(sql);
     // result = Object.assign({},result);
-    console.log(result[0]);
+    // console.log(result[0]);
     res.json(result[0]);
+});
+
+app.post("/getHotelReview", async (req,res) => {
+    let getHotelID = req.body.post;
+    // console.log(getHotelID);
+    let sql = ` SELECT
+                CONCAT(p.name, " ", p.lastname) as review_name,
+                re.score,
+                re.review_note
+                FROM HOLD_MY_CAT.user_profile as p
+                INNER JOIN HOLD_MY_CAT.review as re
+                ON p.user_id = re.user_id
+                WHERE re.hotel_id = ${getHotelID}`;
+    let result = await queryDB(sql);
+    // result = Object.assign({},result);
+    // console.log(result);
+    res.json(result);
 });
 
 ///////////////////// click booking button /////////////////////
 
 app.post("/getHotelBooking_id", async (req,res) => {
     let getHotelID = req.body.post;
+    // console.log(getHotelID);
     res.cookie('hotel_id', getHotelID, 1);
-    res.redirect('/booking.html');
+    return res.redirect('/booking.html');
 });
 
 app.listen(port, hostname, () => {
