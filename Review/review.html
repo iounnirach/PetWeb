@@ -1,0 +1,87 @@
+<html>
+
+<head>
+	<title>menu</title>
+	<meta charset="UTF-8">
+	<meta name='viewport' content='width=device-width,initial-scale'>
+	<link rel="icon" type="image/png" href="img/pawbig.png" sizes="16x16" />
+	<link rel='stylesheet' type='text/css' href='decor.css'>
+	<script src="menubar.js" defer></script>
+</head>
+
+
+<body>
+	<nav class="navbar">
+		<div class="logo">HOLD MY PET <img src="img/pawbig.png" class="piclogo"></div>
+		<a href="#" class="toggle-button">
+			<span class="line"></span>
+			<span class="line"></span>
+			<span class="line"></span>
+		</a>
+		<div class="navbar-links">
+			<ul>
+				<li><a href="home.html">หน้าหลัก</a></li>
+				<li><a href="#">โรงแรมของฉัน</a></li>
+				<li><a href="#">ประวัติ</a></li>
+				<li class="dropdown">
+					<a href="javascript:void(0)" class="dropbtn">โปรไฟล์ <img class="icon_down"
+							src="img/icondown.png" /></a>
+					<div class="dropdown-content">
+						<a href="#">แก้ไขโปรไฟล์</a>
+						<a href="/logout">ออกจากระบบ</a>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+	</nav>
+
+	<h2>รีวิว</h2>
+	<div>
+		<div>
+			<label>ผู้ให้บริการ</label>
+			<!-- name="firstname" name="lastname" -->
+			บุญรอด รักสัตว์ <br>
+			<!-- name="tel" -->
+			เบอร์โทรศัพท์ : <br>
+
+			ตำแหน่งที่ตั้ง : <br>
+			<br>
+		</div>
+		<!--  form action is ไปทำที่ไหนต่อ -->
+		<form action="home.html" id="addReview">
+			<div>
+				<label for="score">คะแนน</label>
+				<input type="radio" name="score_review" id="score5" value="5">
+				<label for="score5">5</label>
+				<input type="radio" name="score_review" id="score4" value="4">
+				<label for="score4">4</label>
+				<input type="radio" name="score_review" id="score3" value="3">
+				<label for="score3">3</label>
+				<input type="radio" name="score_review" id="score2" value="2">
+				<label for="score2">2</label>
+				<input type="radio" name="score_review" id="score1" value="1">
+				<label for="score1">1</label><br>
+			</div>
+
+			<div>
+				<label for="Review">แสดงความคิดเห็น</label> <br>
+				<div>
+					<textarea name="text_review" id="review" rows="5" cols="47"></textarea>
+				</div>
+			</div>
+
+			<div>
+				<a href="/Users/kaktoon/Downloads/%E0%B8%9B%E0%B8%B53%E0%B9%80%E0%B8%97%E0%B8%AD%E0%B8%A12/DMT353_DATABASE/Review/home/home.html"
+					class="btn_close">ปิด</a>
+				<button name="confirm" onclick="confirm_review();" class="btn_confirm">ยืนยัน</button>
+			</div>
+
+		</form>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+	<script src="review.js"></script>
+</body>
+
+</html>
