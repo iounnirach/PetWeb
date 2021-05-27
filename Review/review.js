@@ -31,10 +31,10 @@ async function confirm_review() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            userid: 1,
-            hotelid: 1,
-            score: score_review,
-            review_msg: msg,
+            userid: req.cookies.userid,
+            hotelid: req.body.hotelid,
+            score: rreq.body.score_review,
+            review_msg: req.body.text_review,
             
         })
     }).then((response) => {

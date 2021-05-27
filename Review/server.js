@@ -42,57 +42,23 @@ const queryDB = (sql) => {
 }
 
 ///////////////////// show all hotel /////////////////////
-
+//http method get for request information
 app.get("/showDBChair", async (req,res) => {
-    let sql = `SELECT * FROM HOLD_MY_CAT.hotel_profile`;
+    //  * change hotel_name address subdistrict district province postal_code 
+    let sql = `SELECT * FROM HOLD_MY_CAT.hotel_name, HOLD_MY_CAT.hotel_address, HOLD_MY_CAT.hotel_subdistrict, HOLD_MY_CAT.hotel_district, HOLD_MY_CAT.hotel_province, HOLD_MY_CAT.hotel_postal_code`;
     let result = await queryDB(sql);
     result = Object.assign({},result);
-    // console.log(result);
     res.json(result);
-});
-
-///////////////////// show hotel detail /////////////////////
-
-app.post("/addDBcart", async (req,res) => {
-    let getCartID = req.body.post;
-    // console.log(getCartID);
-    let sql = `SELECT * FROM FROM HOLD_MY_CAT.hotel_profile WHERE hotel_id = ${getCartID}`;
-    let result = await queryDB(sql);
-    if(result.length > 0){
-        // sql = `SELECT quantity FROM OPEN_HOUSE_IDEA.cart WHERE furniture_id = ${getCartID} AND user_id = ${req.cookies.UID}`;
-        // result = await queryDB(sql);
-        // console.log(result);
-        sql = `UPDATE OPEN_HOUSE_IDEA.cart SET quantity= quantity + 1 WHERE furniture_id = ${getCartID} AND user_id = ${req.cookies.UID}`
-        result = await queryDB(sql);
-        sql = `SELECT quantity FROM OPEN_HOUSE_IDEA.cart WHERE furniture_id = ${getCartID} AND user_id = ${req.cookies.UID}`;
-        result = await queryDB(sql);
-        // console.log(result[0].quantity);
-        alert(`You are add ${result[0].quantity} furniture to cart`);
-        // alert('You are already add this furniture to cart');
-    }
-    else{
-        sql = `INSERT INTO OPEN_HOUSE_IDEA.cart (user_id, furniture_id, quantity) VALUES (${req.cookies.UID}, ${getCartID}, 1)`;
-        result = await queryDB(sql);
-        alert('Add this furniture to cart');
-    }
 });
 
 //REVIEW
 // htpp method use post for insert or add information
 app.post("/review", async (req,res) => {
-    const sql = `INSERT INTO HOLD_MY_CAT.review (user_id, hotel_id, score, review_note) VALUES (${req.body.userid},${req.body.hotelid},${req.body.score},'${req.body.review_msg}')`;
+    const sql = `INSERT INTO HOLD_MY_CAT.review (user_id, hotel_id, score, review_note) VALUES (${req.cookies.userid},${req.body.hotelid},
+    ${req.body.score_review},'${req.body.text_review}')`;
     const result = await queryDB(sql);
-    alert('Add already review');
-});
-
-app.post("/showreview", async (req,res) => {
-    const sql = `SELECT review.score, review.review_note, user_profile.name, user_profile.lastname
-    FROM HOLD_MY_CAT.review 
-    INNER JOIN user_profile
-    ON review.user_id = user_profile.user_id
-    WHERE hotel_id = ${req.body.hotelid}`
-    const result = await queryDB(sql);
-    res.json(result);    
+    // res.send(data);
+    console.log(a);
 });
 
 app.listen(port, () => {
