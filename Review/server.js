@@ -54,11 +54,11 @@ app.get("/showDBChair", async (req,res) => {
 //REVIEW
 // htpp method use post for insert or add information
 app.post("/review", async (req,res) => {
-    const sql = `INSERT INTO HOLD_MY_CAT.review (user_id, hotel_id, score, review_note) VALUES (${req.cookies.userid},${req.body.hotelid},
+    const sql = `INSERT INTO HOLD_MY_CAT.review (user_id, hotel_id, score, review_note) VALUES (1,1,
     ${req.body.score_review},'${req.body.text_review}')`;
     const result = await queryDB(sql);
     // res.send(data);
-    console.log(a);
+    res.end();
 });
 
 app.listen(port, () => {
