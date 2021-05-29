@@ -40,6 +40,18 @@ const queryDB = (sql) => {
         })
     })
 }
+///////////////////// show home map /////////////////////
+
+app.get("/getDBMap", async (req,res) => {
+    let sql = `SELECT lat, lng, hotel_name FROM HOLD_MY_CAT.hotel_profile`;
+    let result = await queryDB(sql);
+    // result = Object.assign({},result);
+    // console.log(result[0].lat, result[0].lng, result[0].hotel_name);
+    // for(let i=0; i<result.length; i++){
+    //     res.json([result[i].lat, result[i].lng, result[i].hotel_name]);
+    // }
+    res.json(result);
+});
 
 ///////////////////// show all hotel /////////////////////
 
@@ -54,8 +66,8 @@ app.get("/getDBHotel", async (req,res) => {
                 hp.district,
                 hp.province,
                 hp.postal_code,
-                hp.latitude,
-                hp.longitude,
+                hp.lat,
+                hp.lng,
                 hp.hotel_note
                 FROM HOLD_MY_CAT.user_profile as p
                 INNER JOIN HOLD_MY_CAT.hotel_profile as hp
@@ -78,8 +90,8 @@ app.get("/getDBHotel", async (req,res) => {
 
 app.post("/getHotelDetail", async (req,res) => {
     let getHotelID = req.body.post;
-    // console.log(getCartID);
-    let sql = ` SELECT
+    // console.log(getHotelID);
+    let sql = ` SELECT 
                 hp.hotel_id,
                 hp.hotel_name,
                 p.tell,
@@ -87,14 +99,14 @@ app.post("/getHotelDetail", async (req,res) => {
                 TRUNCATE(AVG(re.score),2) AS avg_score,
                 hp.cat_number,
                 hp.symptom,
-                hp.latitude,
-                hp.longitude,
+                hp.lat,
+                hp.lng,
                 hp.hotel_note
                 FROM HOLD_MY_CAT.user_profile as p
                 INNER JOIN HOLD_MY_CAT.hotel_profile as hp
                 ON p.user_id = hp.user_id
                 INNER JOIN HOLD_MY_CAT.review as re
-                ON p.user_id = re.user_id
+                ON hp.hotel_id = re.hotel_id
                 WHERE hp.hotel_id = ${getHotelID}`;
     let result = await queryDB(sql);
     // result = Object.assign({},result);
@@ -112,7 +124,7 @@ app.post("/getHotelReview", async (req,res) => {
                 FROM HOLD_MY_CAT.user_profile as p
                 INNER JOIN HOLD_MY_CAT.review as re
                 ON p.user_id = re.user_id
-                WHERE re.hotel_id = ${getHotelID}`;
+                WHERE re.hotel_id = ${getHotelID} AND re.score != 0`;
     let result = await queryDB(sql);
     // result = Object.assign({},result);
     // console.log(result);
@@ -123,9 +135,10 @@ app.post("/getHotelReview", async (req,res) => {
 
 app.post("/getHotelBooking_id", async (req,res) => {
     let getHotelID = req.body.post;
-    // console.log(getHotelID);
+    console.log(getHotelID);
     res.cookie('hotel_id', getHotelID, 1);
-    return res.redirect('/booking.html');
+    res.json(getHotelID);
+    // return res.redirect('booking.html');
 });
 
 app.listen(port, hostname, () => {
