@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Booking guest page</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='booking.css'>
+    <script src='booking_guest.js'></script>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">HOLD MY PET <img src="img/pawbig.png" class="piclogo"></div>
+        <a href="#" class="toggle-button">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </a>
+        <div class="navbar-links">
+            <ul>
+                <li><a href="home.html">หน้าหลัก</a></li>
+                <li><a href="#">โรงแรมของฉัน</a></li>
+                <li><a href="#">ประวัติ</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">โปรไฟล์ <img class="icon_down" src="img/icondown.png" /></a>
+                    <div class="dropdown-content">
+                        <a href="#">แก้ไขโปรไฟล์</a>
+                        <a href="/logout">ออกจากระบบ</a>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <form name="BookingGuest" id="BookingGuest" action="/insert_databooking" method="post">
+
+        <h1>ทำการจอง</h1>
+        <fieldset>
+            <div class="span1">
+
+                <div id="head1"><b>จำนวนคงเหลือ</b></div>
+                <div id="topic1">
+                    <div id="catnumber"></div>
+                </div>
+
+                <p id="head2"><b>วันที่เริ่มฝาก</b></p>
+                <p id="topic2"><input id="start_deal" type="date" name="start_deal" required></p>
+
+            </div>
+
+            <div class="head3">
+                <div class="topic3">
+                    <div id="head"><b>จำนวนแมว :</b></div>
+                    <div id="topic">
+                        ปกติ<input type="number" id="normal_symptom" name="normal_symptom" min="0" max="30" required>
+                        <label for="normal">ตัว  </label><br></div>
+                    <div id="topic">
+                        ป่วย<input type="number" id="sick_symptom" name="sick_symptom" min="0" max="30" required>
+                        <label for="sick">ตัว  </label><br></p>
+                    </div>
+                    <div id="topic">
+                        เป็นเวลา<input type="number" id="nights" name="nights" min="0" max="30" required>
+                        <label for="sick">คืน  </label><br></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="span1">
+
+                <div id="head4"><b>อาการป่วย</b></div>
+                <div id="topic4">
+                    <div class="Howsick_all">
+                        <div id="Howsick1">
+                            <input type="checkbox" id="how_sick1" name="how_sick" value="โรคหวัดแมว">
+                            <label for="how_sick">โรคหวัดแมว  </label></div>
+                        <div id="Howsick1">
+                            <input type="checkbox" id="how_sick2" name="how_sick" value="ไข้หัดแมว">
+                            <label for="how_sick">ไข้หัดแมว  </label></div>
+                        <div id="Howsick1">
+                            <input type="checkbox" id="how_sick3" name="how_sick" value="โรคลิวคีเมีย">
+                            <label for="how_sick">โรคลิวคีเมีย  </label></div>
+                        <div id="Howsick1">
+                            <input type="checkbox" id="how_sick4" name="how_sick" value="โรคเอดส์แมว">
+                            <label for="how_sick">โรคเอดส์แมว  </label></div>
+                        <div id="Howsick2_1">
+                            <input type="checkbox" id="how_sick5" name="how_sick" value="โรคเยื่อบุช่องท้องอักเสบ">
+                            <label for="how_sick">โรคเยื่อบุช่องท้องอักเสบ  </label></div>
+                        <div id="Howsick2_2">
+                            <input type="checkbox" id="how_sick6" name="how_sick" value="โรคผิวหนังที่เกิดจากเชื้อรา">
+                            <label for="how_sick">โรคผิวหนังที่เกิดจากเชื้อรา  </label></div>
+                        <div id="Howsick3">
+                            อื่น ๆ โปรดระบุ
+                            <input type="text" id="how_sick_else" name="how_sick"><br></div>
+                    </div>
+                </div>
+
+
+                <p><b>หมายเหตุ</b></p>
+                <textarea name="booking_note" id="booking_note" rows="4" cols="30"></textarea><br>
+                <p> * เริ่มรับฝากตั้งแต่ช่วงเวลา 7:00 - 12:00 น. *</p>
+            </div>
+
+            <hr>
+            <div class="span2">
+                <input id="confirm" type="submit" value="ยืนยัน">
+            </div>
+        </fieldset>
+    </form>
+</body>
+
+</html>
