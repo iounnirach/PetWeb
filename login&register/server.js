@@ -106,9 +106,6 @@ app.post('/editprofile', async (req, res) => {
         return res.redirect('profile.html?error=1');
     }
 })
-
-
-
 //create hotel
 app.post('/createHotel', async (req, res) => {
     let sql1 = `SELECT user_id FROM hotel_profile WHERE user_id = "${req.cookies.user_id}"`;
@@ -157,9 +154,6 @@ app.get('/logout', (req, res) => {
     res.cookie('hotel_id', { maxAge: 0 }, 'path=/');
     return res.redirect('login.html');
 })
-
-
-
 app.listen(port, hostname, () => {
     console.log(`Server running at   http://${hostname}:${port}/register.html`);
 });
