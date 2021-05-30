@@ -11,7 +11,7 @@ body {
 .piclogo{
     width: 30px;
     }
-footer{
+footer {
     position: fixed;
     left: 0;
     bottom: 0;
@@ -19,48 +19,6 @@ footer{
     height: 40px;
     background-color: #FFE8D5;
 }
-
-.center {
-    text-align: center;
-    margin: auto;
-    margin-top: 2%;
-}
-/* menu-bar */
-
-.navbar {
-    /* bar */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #FFE8D5;
-    color: #B4753E;
-    height: 55px;
-}
-
-.logo {
-    font-size: 30px;
-    margin: 10px;
-    margin-left: 20px;
-}
-
-.navbar-links ul {
-    /* พื้นที่ทั้งหมดของlinks */
-    margin: 0px;
-    margin-right: 10px;
-    padding: 0px;
-    display: flex;
-}
-
-.navbar-links li a {
-    /* ข้างในปุ่ม ex.สีตัวอักษร */
-    text-decoration: none;
-    color: black;
-    padding: 10px;
-    display: inline-block;
-}
-
-
-
 h2 {
     text-align: center;
     margin: 2%;
@@ -72,7 +30,6 @@ h2 {
     grid-gap:10px;
     display: grid;
 }
-
 .grid{
     grid-template-columns: 20% auto;
     grid-gap:10px;
@@ -117,6 +74,7 @@ h4{
     border: none;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 }
+
 .button:hover {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0);
     background-color: #B4753E;
@@ -126,27 +84,6 @@ h4{
 .center {
     text-align: center;
     margin-top: 2%;
-}
-
-.score{
-    vertical-align: middle;
-    letter-spacing: 100px;
-}
-
-a, .btn_confirm{
-    background-color: white;
-    border-radius: 5px;
-    text-decoration: none;
-    color: black;
-    padding: 3px;
-    display: inline-block;
-    border: none;
-    margin: 2px;
-    width: 10%;
-}
-
-.btn_review{
-    text-align: center;
 }
 
 /* menu-bar */
@@ -305,6 +242,7 @@ li.dropdown {
         width: 100%;
     }
 }
+
 @media screen and (max-width:660px) {
     .logo {
         margin: 10px;
@@ -396,3 +334,28 @@ li.dropdown {
         font-size: 20px;
     }
 }
+
+.score{
+    vertical-align: middle;
+    letter-spacing: 100px;
+}
+
+a, .btn_confirm{
+    background-color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    color: black;
+    padding: 3px;
+    display: inline-block;
+    border: none;
+    margin: 2px;
+    width: 10%;
+}
+
+.btn_review{
+    text-align: center;
+}
+
+
+
+
