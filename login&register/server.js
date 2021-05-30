@@ -66,7 +66,7 @@ app.post('/login', async (req, res) => {
             console.log("mail : " + result[0].mail);
             console.log("password : " + result[0].password);
             console.log("user_id : " + result[0].user_id);
-            return res.redirect('profile.html');            //จริงๆต้องเปนhome
+            return res.redirect('home.html');            //จริงๆต้องเปนhome
         }
         else if (result[0].mail == req.body.mail && result[0].password != req.body.password) {
             console.log("Password is incorrect!");
@@ -145,7 +145,6 @@ app.get('/deletehotel', async (req, res) => {
     let result = await queryDB(sql);
     res.cookie('hotel_id', { maxAge: 0 }, 'path=/');
     console.log("Delete hotel!");
-    res.end(JSON.stringify("ha"));
     return res.redirect("myhotel.html");
 })
 

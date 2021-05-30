@@ -30,7 +30,7 @@ function pageLoad() {
     const urlParams = new URLSearchParams(queryString);
     if (urlParams.get("error") == 1) {
         alert("คุณมีโรงแรมที่เปิดอยู่แล้ว ถ้าต้องการสร้างใหม่กรุณาปิดบริการโรงแรมเก่าก่อน!");
-    }
+    }	
 }
 function goCreate() {
     document.getElementById("myhotel").style.display = "block";//ก่อนหน้านี้noneอยู่
@@ -50,27 +50,8 @@ const DeleteHotel = (async () => {
             console.log(err);
         })
     })
-    window.location = "myhotel.html";
+    alert("ลบโรงแรมสำเร็จ กรุณาโหลดหน้าอีกครั้งเพื่อคืนค่า");
 })
-// const DeleteHotel = (async () => {
-
-//     // window.location = "myhotel.html";
-//     // res.cookie('hotel_id', { maxAge: 0 }, 'path=/');
-//     // document.getElementById("myhotel").style.display = "block";
-//     // document.getElementById("ShowHotel").style.display = "none";
-//     // document.getElementById("ShowHotel").style.display = "block";
-//     await fetch("/deletehotel", {
-//         method: "delete",
-//     }).then((response) => {
-//         response.json().then((data) => {
-//             alert(data);
-//         });
-//     }).catch((err) => {
-//         alert(err);
-//     });
-// })
-
-
 const Showhotel = (async () => {
     await fetch("/showhotel").then((response) => {
         response.json().then((result) => {
