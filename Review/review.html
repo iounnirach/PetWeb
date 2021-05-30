@@ -12,30 +12,24 @@
 
 <body>
 	<nav class="navbar">
-		<div class="logo">HOLD MY PET <img src="img/pawbig.png" class="piclogo"></div>
+		<div class="logo">
+		  HOLD MY PET <img src="img/pawbig.png" class="piclogo">
+		</div>
 		<a href="#" class="toggle-button">
-			<span class="line"></span>
-			<span class="line"></span>
-			<span class="line"></span>
+		  <span class="line"></span>
+		  <span class="line"></span>
+		  <span class="line"></span>
 		</a>
 		<div class="navbar-links">
-			<ul>
-				<li><a href="home.html">หน้าหลัก</a></li>
-				<li><a href="#myhotel.html">โรงแรมของฉัน</a></li>
-				<li><a href="#history.html">ประวัติ</a></li>
-				<li class="dropdown">
-					<a href="javascript:void(0)" class="dropbtn">โปรไฟล์ <img class="icon_down"
-							src="img/icondown.png" /></a>
-					<div class="dropdown-content">
-						<a href="#profile.html">แก้ไขโปรไฟล์</a>
-						<a href="/logout">ออกจากระบบ</a>
-					</div>
-				</li>
-
-			</ul>
+		  <ul>
+			<li><a href="login.html">หน้าหลัก</a></li>
+			<li><a href="login.html">โรงแรมของฉัน</a></li>
+			<li><a href="login.html">ประวัติ</a></li>
+			<li><a href="login.html">เข้าสู่ระบบ</a></li>
+			<li><a href="register.html">ลงทะเบียน</a></li>
+		  </ul>
 		</div>
-	</nav>
-
+	  </nav>
 	<h2>รีวิว</h2>
 	<div>
 		
@@ -53,15 +47,15 @@
 			</div>
 			<div>
 				<label for="score">คะแนน</label>
-				<input type="radio" name="score_review" id="score5" value="5" class="score">
+				<input type="radio" name="score_review" id="score5" value="5" class="score" required>
 				<label for="score5">5</label>
-				<input type="radio" name="score_review" id="score4" value="4" class="score">
+				<input type="radio" name="score_review" id="score4" value="4" class="score" required>
 				<label for="score4">4</label>
-				<input type="radio" name="score_review" id="score3" value="3" class="score">
+				<input type="radio" name="score_review" id="score3" value="3" class="score" required>
 				<label for="score3">3</label>
-				<input type="radio" name="score_review" id="score2" value="2" class="score">
+				<input type="radio" name="score_review" id="score2" value="2" class="score" required>
 				<label for="score2">2</label>
-				<input type="radio" name="score_review" id="score1" value="1" class="score">
+				<input type="radio" name="score_review" id="score1" value="1" class="score" required>
 				<label for="score1">1</label><br>
 			</div>
 
