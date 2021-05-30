@@ -38,40 +38,41 @@
 
 	<h2>รีวิว</h2>
 	<div>
-		<div>
-			<label>ผู้ให้บริการ</label>
-			<!-- name="firstname" name="lastname" -->
-			บุญรอด รักสัตว์ <br>
-			<!-- name="tel" -->
-			เบอร์โทรศัพท์ : <br>
-
-			ตำแหน่งที่ตั้ง : <br>
-			<br>
-		</div>
+		
 		<!--  form action is ไปทำที่ไหนต่อ -->
 		<form action="/review" method="POST" id="addReview">
 			<div>
+				<label>ผู้ให้บริการ</label>
+				<!-- name="firstname" name="lastname" -->
+				บุญรอด รักสัตว์ <br>
+				<!-- name="tel" -->
+				เบอร์โทรศัพท์ : <br>
+	
+				ตำแหน่งที่ตั้ง : <br>
+				<br>
+			</div>
+			<div>
 				<label for="score">คะแนน</label>
-				<input type="radio" name="score_review" id="score5" value="5">
+				<input type="radio" name="score_review" id="score5" value="5" class="score">
 				<label for="score5">5</label>
-				<input type="radio" name="score_review" id="score4" value="4">
+				<input type="radio" name="score_review" id="score4" value="4" class="score">
 				<label for="score4">4</label>
-				<input type="radio" name="score_review" id="score3" value="3">
+				<input type="radio" name="score_review" id="score3" value="3" class="score">
 				<label for="score3">3</label>
-				<input type="radio" name="score_review" id="score2" value="2">
+				<input type="radio" name="score_review" id="score2" value="2" class="score">
 				<label for="score2">2</label>
-				<input type="radio" name="score_review" id="score1" value="1">
+				<input type="radio" name="score_review" id="score1" value="1" class="score">
 				<label for="score1">1</label><br>
 			</div>
 
 			<div>
 				<label for="Review">แสดงความคิดเห็น</label> <br>
 				<div>
-					<textarea name="text_review" id="review" rows="5" cols="47"></textarea>
+					<textarea name="text_review" id="review" rows="5" cols="72"></textarea>
 				</div>
 			</div>
 
-			<div>
+			<div class="btn_review">
 				<a href="/Users/kaktoon/Downloads/%E0%B8%9B%E0%B8%B53%E0%B9%80%E0%B8%97%E0%B8%AD%E0%B8%A12/DMT353_DATABASE/Review/home/home.html"
 					class="btn_close">ปิด</a>
 				<button name="confirm" onclick="confirm_review();" class="btn_confirm">ยืนยัน</button>
