@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Detail booking guest page</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='booking.css'>
+    <script src='detail_booking.js'></script>
+</head>
+
+<body>
+    <form name="DetailBookingGuest" id="DetailBookingGuest">
+
+        <nav class="navbar">
+            <div class="logo">HOLD MY PET <img src="img/pawbig.png" class="piclogo"></div>
+            <a href="#" class="toggle-button">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </a>
+            <div class="navbar-links">
+                <ul>
+                    <li><a href="home.html">หน้าหลัก</a></li>
+                    <li><a href="#">โรงแรมของฉัน</a></li>
+                    <li><a href="#">ประวัติ</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn">โปรไฟล์ <img class="icon_down" src="img/icondown.png" /></a>
+                        <div class="dropdown-content">
+                            <a href="#">แก้ไขโปรไฟล์</a>
+                            <a href="/logout">ออกจากระบบ</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+        <h1>รายละเอียดการจอง</h1>
+        <div class="detail_page1">
+            <fieldset>
+
+                <div class="span1">
+
+                    <div id="head1"><b>ผู้ใช้บริการ</b>
+                        <div class="userprofile">
+                            <div id="name_user">
+                            </div><br> เบอร์โทร :
+                            <div id="phone_user"></div>
+                        </div>
+                    </div>
+
+                    <p id="head2"><b>วันที่เริ่มฝาก</b>
+                    </p>
+                    <div class="samerow">
+                        <div id="start_deal">
+                        </div>
+
+                        <div class="numberAll_cat">
+                            <form>
+                                <div id="head"><b>จำนวนแมว :</b></div>
+                                <div id="normal_symptom_get"></div>
+                                <div id="sick_symptom_get"></div>
+                                <div id="stay_nights_get"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span2">
+                    <div id="head1">
+                        <hr><b>โรงแรมผู้ให้บริการ</b>
+                        <div class="ownerprofile">
+                            <div id="hotel_user">
+                            </div><br> เบอร์โทร :
+                            <div id="phone_hotal"></div>
+                        </div>
+                        <div class="hotal_locationAll">
+                            <form>
+                                <div id="head1"><b>ตำแหน่งผู้ให้บริการ :</b></div>
+                                <div id="hotel_location1">
+                                </div>
+                                <div id="hotel_location2">
+                                </div>
+                                <div id="hotel_location3">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="head2">
+                        <div class="howsick_note">
+                            <b><p>อาการป่วย :</p></b>
+                            <p id="how_sick">
+                            </p>
+                            <b><p>หมายเหตุ :</p></b>
+                            <p id="hotel_note">
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="detail_page2">
+            <fieldset>
+
+                <div class="span3">
+                    <!-- <div id="head1"><br> -->
+                    <button id="cancel_booking" type="button">ยกเลิกการจอง</button>
+                    <div id="topic1">
+                        <b>สรุปค่าบริการ<br></b>
+                        <b><div id="total_price"></div></b>
+                    </div>
+                    <button id="close" type="button">ปิด</button>
+                </div>
+
+        </div>
+
+        </fieldset>
+        </div>
+    </form>
+
+</body>
