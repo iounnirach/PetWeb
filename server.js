@@ -77,6 +77,7 @@ app.get("/getDBHotel", async (req,res) => {
                     SELECT hotel_id, TRUNCATE(AVG(score),2) as avg_score
                     FROM HOLD_MY_CAT.review
                     GROUP BY hotel_id
+                    HAVING COUNT(review_id) != 0 
                 ) as re
                 ON hp.hotel_id = re.hotel_id
                 ORDER BY avg_score DESC`;
@@ -90,6 +91,7 @@ app.get("/getDBHotel", async (req,res) => {
 
 app.post("/getHotelDetail", async (req,res) => {
     let getHotelID = req.body.post;
+    res.cookie('hotel_id', getHotelID, 1);
     // console.log(getHotelID);
     let sql = ` SELECT 
                 hp.hotel_id,
@@ -107,7 +109,8 @@ app.post("/getHotelDetail", async (req,res) => {
                 ON p.user_id = hp.user_id
                 INNER JOIN HOLD_MY_CAT.review as re
                 ON hp.hotel_id = re.hotel_id
-                WHERE hp.hotel_id = ${getHotelID}`;
+                WHERE hp.hotel_id = ${getHotelID}
+                HAVING COUNT(re.score) != 0`;
     let result = await queryDB(sql);
     // result = Object.assign({},result);
     // console.log(result[0]);
@@ -129,6 +132,14 @@ app.post("/getHotelReview", async (req,res) => {
     // result = Object.assign({},result);
     // console.log(result);
     res.json(result);
+});
+
+app.post("/getDBMapDetail", async (req,res) => {
+    let getHotelID = req.body.post;
+    let sql = `SELECT lat, lng FROM HOLD_MY_CAT.hotel_profile WHERE hotel_id = ${getHotelID}`;
+    let result = await queryDB(sql);
+    console.log(result[0]);
+    res.json(result[0]);
 });
 
 ///////////////////// click booking button /////////////////////

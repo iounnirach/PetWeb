@@ -10,6 +10,7 @@ function pageload() {
 
     getDataHotel();
     getDataMap();
+    // getDataMapDetail();
    
 }
 // function ShowInfo() {
@@ -136,6 +137,7 @@ async function getToHotelDetail(){
     // console.log(this.id);
     hotelDetail_ID(this.id);
     hotelReview_ID(this.id);
+    getDataMapDetail(this.id);
 }
 async function hotelDetail_ID(hotelID){
     // console.log(hotelID);
@@ -215,6 +217,33 @@ function hotelReview(data){
         containerReview.appendChild(reviewName_score);
         containerReview.appendChild(reviewNote);
     }
+}
+///////////////////// hotel Detail Map
+async function getDataMapDetail(hotelID){
+	const response = await fetch("/getDBMapDetail", {
+        method: "POST",
+        headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+        post:hotelID}) // ส่งค่า hotelID ไปให้ server.js
+    })
+    const content = await response.json();
+    // console.log(content);
+	hotelDetailMap(content);
+}
+function hotelDetailMap(data){
+    const myLatLng = data;
+    const map = new google.maps.Map(document.getElementById("myMap"), {
+        zoom: 18,
+        center: myLatLng,
+    });
+    new google.maps.Marker({
+        position: myLatLng,
+        map,
+        title: "My Hotel",
+    });
 }
 
 ///////////////////// click booking button /////////////////////
