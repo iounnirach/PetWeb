@@ -93,8 +93,10 @@ function showHotel(data){
     for(var i = 0; i < keys.length; i++){
         var container = document.createElement("div");
         container.className = "blog";
+        container.id = "blog";
         var containerText = document.createElement("div");
         containerText.className = "blogText";
+        containerText.id = "blogText";
         var containerBtn = document.createElement("div");
         containerBtn.className = "blogBtn";
 
@@ -114,7 +116,11 @@ function showHotel(data){
         bookingBtn.innerHTML = "จอง";
         bookingBtn.onclick = getToHotelBooking;
 
-        hotelName.innerHTML = data[keys[i]].hotel_name +" ("+ data[keys[i]].avg_score + ")";
+        let totalScore = data[keys[i]].avg_score;
+        if(totalScore == null){
+            totalScore = 0;
+        }
+        hotelName.innerHTML = data[keys[i]].hotel_name +" ("+ totalScore + ")";
         catNumber.innerHTML = "จำนวนที่รองรับต่อวัน : แมว " + data[keys[i]].cat_number + " ตัว";
         catSymptom.innerHTML = "อาการที่รองรับ : " + data[keys[i]].symptom;
         location.innerHTML = data[keys[i]].province +" "+ data[keys[i]].district +" "+ data[keys[i]].subdistrict +" "+ data[keys[i]].postal_code;
@@ -176,9 +182,14 @@ function hotelDetail(data){
     }
     // contactBtn.onclick = "location.href=" + data.linkFB;
 
+    let totalScore = data.avg_score;
+    if(totalScore == null){
+        totalScore = 0;
+    }
+
     hotelName.innerHTML = data.hotel_name;
     tell.innerHTML = data.tell;
-    score.innerHTML = data.avg_score;
+    score.innerHTML = totalScore;
     catNumber.innerHTML = data.cat_number;
     hotelNote.innerHTML = data.hotel_note;
 }

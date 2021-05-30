@@ -41,7 +41,8 @@
         <div id="main">
             <div class="searchLeft">
                 <h3>เลือกตำเเหน่งให้บริการ</h3>
-                <input type="text" name="search" id="search">
+                <!-- <input type="text" name="search" id="search"> -->
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
                 <h3>หรือคลิกที่นี่ เพื่อหาโรงเเรมสัตว์เลี้ยงที่ใกล้ท่านที่สุด</h3>
                 
                 <div class="blogSearch" id="blogSearch">
@@ -119,6 +120,27 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function myFunction() {
+            var p, txtValue;
+            var input = document.getElementById("myInput");
+            var filter = input.value.toUpperCase();
+            var blogSearch = document.getElementById("blogSearch");
+            var blog = blogSearch.document.getElementByTagName("div");
+            // var div = blog.getElementsById("blogText");
+            for (var i = 0; i < blog.length; i++) {
+                p = blog[i].getElementsByTagName("p")[2];
+                txtValue = p.textContent || p.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    blog[i].style.display = "";
+                } else {
+                    blog[i].style.display = "none";
+                }
+            }
+        }
+        </script>
+
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-cE5DFDO2ir695dGBOLOwHRg-sTv-x9Q&callback=initMap&libraries=&v=weekly"
       async

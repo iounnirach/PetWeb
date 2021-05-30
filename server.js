@@ -74,7 +74,7 @@ app.get("/getDBHotel", async (req,res) => {
                 ON p.user_id = hp.user_id
                 INNER JOIN
                 (
-                    SELECT hotel_id, TRUNCATE(AVG(score),2) as avg_score
+                    SELECT hotel_id, TRUNCATE(SUM(score) / (COUNT(score)-1),2) as avg_score
                     FROM HOLD_MY_CAT.review
                     GROUP BY hotel_id
                     HAVING COUNT(review_id) != 0 
@@ -93,12 +93,13 @@ app.post("/getHotelDetail", async (req,res) => {
     let getHotelID = req.body.post;
     res.cookie('hotel_id', getHotelID, 1);
     // console.log(getHotelID);
-    let sql = ` SELECT 
+    let sql = ` SELECT
+                re.hotel_id,
                 hp.hotel_id,
                 hp.hotel_name,
                 p.tell,
                 p.linkFB,
-                TRUNCATE(AVG(re.score),2) AS avg_score,
+                re.avg_score,
                 hp.cat_number,
                 hp.symptom,
                 hp.lat,
@@ -107,10 +108,15 @@ app.post("/getHotelDetail", async (req,res) => {
                 FROM HOLD_MY_CAT.user_profile as p
                 INNER JOIN HOLD_MY_CAT.hotel_profile as hp
                 ON p.user_id = hp.user_id
-                INNER JOIN HOLD_MY_CAT.review as re
+                INNER JOIN
+                (
+                    SELECT hotel_id, TRUNCATE(SUM(score) / (COUNT(score)-1),2) as avg_score
+                    FROM HOLD_MY_CAT.review
+                    GROUP BY hotel_id
+                    HAVING COUNT(review_id) != 0 
+                ) as re
                 ON hp.hotel_id = re.hotel_id
-                WHERE hp.hotel_id = ${getHotelID}
-                HAVING COUNT(re.score) != 0`;
+                WHERE hp.hotel_id = ${getHotelID}`;
     let result = await queryDB(sql);
     // result = Object.assign({},result);
     // console.log(result[0]);
