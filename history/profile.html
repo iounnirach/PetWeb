@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <title>Profile</title>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width,initial-scale'>
+    <link rel="icon" type="image/png" href="img/pawbig.png" sizes="16x16" />
+    <link rel='stylesheet' type='text/css' href='profile.css'>
+    <script src="profile.js" defer></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">HOLD MY PET <img src="img/pawbig.png" class="piclogo"></div>
+        <a href="#" class="toggle-button">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </a>
+        <div class="navbar-links">
+            <ul>
+                <li><a href="home.html">หน้าหลัก</a></li>
+                <li><a href="showhotel.html">โรงแรมของฉัน</a></li>
+                <li><a href="history.html">ประวัติ</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">โปรไฟล์ <img class="icon_down"
+                            src="img/icondown.png" /></a>
+                    <div class="dropdown-content">
+                        <a href="#">แก้ไขโปรไฟล์</a>
+                        <a href="/logout">ออกจากระบบ</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <h2>โปรไฟล์</h2>
+    <div class="edit-profile">
+        <form name="profileform" id="profileform" action="/editprofile" method="POST">
+            <div class="user_id">user id : <span id="user_id"></span></div>
+            <div class="grid">
+                <topic>ชื่อ:</topic>
+                <input type="text" name="firstname" class="firstname" id="firstname" required>
+                <topic>นามสกุล:</topic>
+                <input type="text" name="lastname" class="lastname" id="lastname" required>
+
+                <topic>E-mail:</topic>
+                <input type="email" name="mail" class="mail" id="mail" required>
+
+                <topic>เบอร์โทรศัพท์:</topic>
+                <input type="text" name="tell" class="tell" id="tell" required>
+
+                <topic>Link-Facebook:</topic>
+                <input type="url" name="linkFB" class="linkFB" id="linkFB" required>
+
+                <topic>รหัสผ่าน:</topic>
+                <input type="text" name="password" class="password" id="password" minlength="8" required>
+
+            </div>
+
+
+            <div class="center">
+                <input class="button" type="submit" id="save_btn" value="บันทึก">
+            </div>
+
+        </form>
+        <footer>
+        </footer>
+</body>
+
+</html>
