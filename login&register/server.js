@@ -155,5 +155,5 @@ app.get('/logout', (req, res) => {
     return res.redirect('login.html');
 })
 app.listen(port, hostname, () => {
-    console.log(`Server running at   http://${hostname}:${port}/register.html`);
+    console.log(`Server running at   http://${hostname}:${port}/login.html`);  //จริงๆต้องเป็นhomeที่ยังไม่ล็อกอิน
 });

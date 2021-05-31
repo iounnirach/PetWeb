@@ -375,3 +375,8 @@ input#symptom {
 #myhotel{
     display: none;
 }
+.textfill{
+    color:#CC4747 ;
+    margin-bottom: 5px;
+    text-align: center;
+}

@@ -84,8 +84,11 @@ h4{
 .center {
     text-align: center;
     margin-top: 2%;
+    
 }
-
+.center>a{
+    color: #000;
+}
 /* menu-bar */
 
 .navbar {
