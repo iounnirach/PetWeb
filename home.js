@@ -235,7 +235,7 @@ function hotelDetail(data){
     }
 
     hotelName.innerHTML = data.hotel_name;
-    tell.innerHTML = data.tell;
+    tell.innerHTML = "0"+data.tell;
     score.innerHTML = totalScore;
     catNumber.innerHTML = data.cat_number;
     hotelNote.innerHTML = data.hotel_note;
