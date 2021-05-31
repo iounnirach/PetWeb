@@ -82,8 +82,8 @@ app.get("/getDBHotel", async (req,res) => {
                 ON hp.hotel_id = re.hotel_id
                 ORDER BY avg_score DESC`;
     let result = await queryDB(sql);
-    result = Object.assign({},result);
-    // console.log(result);
+    // result = Object.assign({},result);
+    console.log(result);
     res.json(result);
 });
 

@@ -1,4 +1,3 @@
-
 window.onload = pageload;
 function pageload() {
     const toggleButton = document.getElementsByClassName('toggle-button')[0];
@@ -78,72 +77,120 @@ function initMap(data) {
       });
     });
   }
+///////////////////// filter search /////////////////////
+const blogSearch = document.getElementById("blogSearch"); // element ที่ครอบกล่องข้อความทั้งหมด
+const searchBar = document.getElementById("search"); // element input type="text"
+let allHotel = []; // นำ data ที่ได้ทั้งหมดมาใส่ในตัวเเปร array
 
+// console.log(searchBar);
+searchBar.addEventListener('keyup', (e) => {
+    // const searchString = e.target.value; // เอาค่ามาเฉยๆ ยังไม่ได้เเปลงให้เป็นตัวพิมเล็ก
+    // เเปลงเป็นตัวพิมเล็กเพื่อให้ง่ายต่อการค้นหา
+    const searchString = e.target.value.toLowerCase();
+    
+    const filteredHotel = allHotel.filter((hotel) => {
+        return (
+            // hotel.subdistrict.includes(searchString) // เอาค่ามาเฉยๆ ยังไม่ได้เเปลงให้เป็นตัวพิมเล็ก
+            hotel.subdistrict.toLowerCase().includes(searchString) || 
+            hotel.district.toLowerCase().includes(searchString) || 
+            hotel.province.toLowerCase().includes(searchString)
+        );
+    });
+    console.log(filteredHotel);
+    showHotel(filteredHotel);
+});
+///////////////////// get all hotel /////////////////////
 async function getDataHotel(){
 	const response = await fetch("\getDBHotel");
-	const content = await response.json();
-    // console.log(content);
-	showHotel(content);
+	allHotel = await response.json();
+    console.log(allHotel);
+	showHotel(allHotel);
 }
 
-function showHotel(data){
-	var blogSearch = document.getElementById("blogSearch");
-    var keys = Object.keys(data);
+// function showHotel(data){ // สร้าง html เเบบเก่า
+// 	var blogSearch = document.getElementById("blogSearch");
+//     var keys = Object.keys(data);
 
-    for(var i = 0; i < keys.length; i++){
-        var container = document.createElement("div");
-        container.className = "blog";
-        container.id = "blog";
-        var containerText = document.createElement("div");
-        containerText.className = "blogText";
-        containerText.id = "blogText";
-        var containerBtn = document.createElement("div");
-        containerBtn.className = "blogBtn";
+//     for(var i = 0; i < keys.length; i++){
+//         var container = document.createElement("div");
+//         container.className = "blog";
+//         container.id = "blog";
+//         var containerText = document.createElement("div");
+//         containerText.className = "blogText";
+//         containerText.id = "blogText";
+//         var containerBtn = document.createElement("div");
+//         containerBtn.className = "blogBtn";
 
-        var hotelName = document.createElement("h4");
-        var catNumber = document.createElement("p");
-        var catSymptom = document.createElement("p");
-        var location = document.createElement("p");
+//         var hotelName = document.createElement("h4");
+//         var catNumber = document.createElement("p");
+//         var catSymptom = document.createElement("p");
+//         var location = document.createElement("p");
 
-        var infoBtn = document.createElement("button");
-        infoBtn.className = "infoBtn";
-        infoBtn.id = data[keys[i]].hotel_id;
-        infoBtn.innerHTML = "รายละเอียด";
-        infoBtn.onclick = getToHotelDetail;
-        var bookingBtn = document.createElement("button");
-        bookingBtn.className = "booking";
-        bookingBtn.id = data[keys[i]].hotel_id;
-        bookingBtn.innerHTML = "จอง";
-        bookingBtn.onclick = getToHotelBooking;
+//         var infoBtn = document.createElement("button");
+//         infoBtn.className = "infoBtn";
+//         infoBtn.id = data[keys[i]].hotel_id;
+//         infoBtn.innerHTML = "รายละเอียด";
+//         infoBtn.onclick = getToHotelDetail;
+//         var bookingBtn = document.createElement("button");
+//         bookingBtn.className = "booking";
+//         bookingBtn.id = data[keys[i]].hotel_id;
+//         bookingBtn.innerHTML = "จอง";
+//         bookingBtn.onclick = getToHotelBooking;
 
-        let totalScore = data[keys[i]].avg_score;
-        if(totalScore == null){
-            totalScore = 0;
-        }
-        hotelName.innerHTML = data[keys[i]].hotel_name +" ("+ totalScore + ")";
-        catNumber.innerHTML = "จำนวนที่รองรับต่อวัน : แมว " + data[keys[i]].cat_number + " ตัว";
-        catSymptom.innerHTML = "อาการที่รองรับ : " + data[keys[i]].symptom;
-        location.innerHTML = data[keys[i]].province +" "+ data[keys[i]].district +" "+ data[keys[i]].subdistrict +" "+ data[keys[i]].postal_code;
+//         let totalScore = data[keys[i]].avg_score;
+//         if(totalScore == null){
+//             totalScore = 0;
+//         }
+//         hotelName.innerHTML = data[keys[i]].hotel_name +" ("+ totalScore + ")";
+//         catNumber.innerHTML = "จำนวนที่รองรับต่อวัน : แมว " + data[keys[i]].cat_number + " ตัว";
+//         catSymptom.innerHTML = "อาการที่รองรับ : " + data[keys[i]].symptom;
+//         location.innerHTML = data[keys[i]].province +" "+ data[keys[i]].district +" "+ data[keys[i]].subdistrict +" "+ data[keys[i]].postal_code;
 
-        blogSearch.appendChild(container);
+//         blogSearch.appendChild(container);
 
-        container.appendChild(containerText);
-        container.appendChild(containerBtn);
-        containerText.appendChild(hotelName);
-        containerText.appendChild(catNumber);
-        containerText.appendChild(catSymptom);
-        containerText.appendChild(location);
-        containerBtn.appendChild(infoBtn);
-        containerBtn.appendChild(bookingBtn);
-    }
-}
+//         container.appendChild(containerText);
+//         container.appendChild(containerBtn);
+//         containerText.appendChild(hotelName);
+//         containerText.appendChild(catNumber);
+//         containerText.appendChild(catSymptom);
+//         containerText.appendChild(location);
+//         containerBtn.appendChild(infoBtn);
+//         containerBtn.appendChild(bookingBtn);
+//     }
+// }
+
+const showHotel = (hotels) => { // สร้าง html เเบบใหม่
+    const htmlString = hotels
+        .map((hotel) => {
+            let totalScore = hotel.avg_score;
+            if(totalScore == null){
+                totalScore = 0;
+            }
+            return `
+            <div class="blog" id="blog">
+                <div class="blogText" id="blogText">
+                    <h4>${hotel.hotel_name} (${totalScore})</h4>
+                    <p>จำนวนที่รองรับต่อวัน : แมว ${hotel.cat_number} ตัว</p>
+                    <p>อาการที่รองรับ : ${hotel.symptom}</p>
+                    <p>${hotel.province} ${hotel.district} ${hotel.subdistrict} ${hotel.postal_code}</p>
+                </div>
+                <div class="blogBtn">
+                    <button class="infoBtn" id="${hotel.hotel_id}" onclick="getToHotelDetail(${hotel.hotel_id})">รายละเอียด</button>
+                    <button class="booking" id="${hotel.hotel_id}" onclick="getToHotelBooking(${hotel.hotel_id})">จอง</button>
+                </div>
+            </div>
+            `;
+        })
+        .join('');
+        blogSearch.innerHTML = htmlString; // blogSearch คือตัวเเปร count blogSearch ที่เอามาจาก filter search
+};
 
 ///////////////////// click detail button /////////////////////
-async function getToHotelDetail(){
+async function getToHotelDetail(data){
     // console.log(this.id);
-    hotelDetail_ID(this.id);
-    hotelReview_ID(this.id);
-    getDataMapDetail(this.id);
+    hotelDetail_ID(data);
+    hotelReview_ID(data);
+    getDataMapDetail(data);
 }
 async function hotelDetail_ID(hotelID){
     // console.log(hotelID);
@@ -258,9 +305,9 @@ function hotelDetailMap(data){
 }
 
 ///////////////////// click booking button /////////////////////
-async function getToHotelBooking(){
+async function getToHotelBooking(data){
     // console.log(this.id);
-    hotelBooking_ID(this.id);
+    hotelBooking_ID(data);
 }
 async function hotelBooking_ID(hotelID){ // save cookie hotel_id
     // console.log(hotelID);
