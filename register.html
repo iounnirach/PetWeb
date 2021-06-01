@@ -1,0 +1,69 @@
+<html>
+
+<head>
+  <title>Register</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' type='text/css' href='loginRegis.css'>
+  <link rel="icon" type="image/png" href="img/paw3.png" sizes="16x16" />
+  <script src="register.js" defer></script>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      HOLD MY PET <img src="img/pawbig.png" class="piclogo">
+    </div>
+    <a href="#" class="toggle-button">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </a>
+    <div class="navbar-links">
+      <ul>
+        <li><a href="homeFirst.html">หน้าหลัก</a></li>
+        <li><a href="login.html">โรงแรมของฉัน</a></li>
+        <li><a href="login.html">ประวัติ</a></li>
+        <li><a href="login.html">เข้าสู่ระบบ</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div>
+    <h2>ลงทะเบียน</h2>
+    <form name="registerform" id="registerform" action="/register" method="POST">
+      <div class="grid">
+        <topic>ชื่อ:</topic>
+        <input type="text" name="firstname" class="firstname" id="firstname" required>
+        <topic>นามสกุล:</topic>
+        <input type="text" name="lastname" class="lastname" id="lastname" required>
+        
+        <topic>E-mail:</topic>
+        <input type="email" name="mail" class="mail" id="mail" required>
+        
+        <topic>เบอร์โทรศัพท์:</topic>
+        <input type="tel" name="tell" class="tell" id="tell" required>
+      
+        <topic>Link-Facebook:</topic>
+        <input type="text" name="linkFB" class="linkFB" id="linkFB" required>
+        
+        <topic>รหัสผ่าน:</topic>
+        <input type="text" name="password" class="password" id="password" minlength="8" required>
+        <h4>(อย่างน้อย 8 ตัวอักษร)</h4>
+        <topic>ยืนยันรหัสผ่าน:</topic>
+        <input type="text" name="re_password"class="password" id="re_password" required>
+        
+      </div>
+        
+        
+        <div class="center">
+          <input class="button" type="submit" id="submit_btn" value="ลงทะเบียน">
+        </div>
+      
+    </form>
+  </div>
+  <footer>
+  </footer>
+</body>
+
+</html>

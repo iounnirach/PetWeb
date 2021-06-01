@@ -219,10 +219,10 @@ function hotelDetail(data){
     // document.getElementsByName('booking').setAttribute('id', `${data.hotel_id}`);
     var bookingBtn = document.getElementsByName('booking')[0];
     bookingBtn.id = data.hotel_id;
-    bookingBtn.onclick = getToHotelBooking;
-    // document.getElementById(`${data.hotel_id}`)[2].onclick = function (){
-    //     location.href = 'http://localhost:3001/booking.html';
-    // }
+    bookingBtn.onclick = getToHotelBookingDetail;
+    document.getElementById(`${data.hotel_id}`).onclick = function (){
+        location.href = 'http://localhost:3001/booking.html';
+    }
 
     document.getElementById("Link-FB").onclick = function (){
         location.href = data.linkFB;
@@ -235,7 +235,7 @@ function hotelDetail(data){
     }
 
     hotelName.innerHTML = data.hotel_name;
-    tell.innerHTML = "0"+data.tell;
+    tell.innerHTML = data.tell;
     score.innerHTML = totalScore;
     catNumber.innerHTML = data.cat_number;
     hotelNote.innerHTML = data.hotel_note;
@@ -305,6 +305,9 @@ function hotelDetailMap(data){
 }
 
 ///////////////////// click booking button /////////////////////
+async function getToHotelBookingDetail(){
+    hotelBooking_ID(this.id);
+}
 async function getToHotelBooking(data){
     // console.log(this.id);
     hotelBooking_ID(data);
