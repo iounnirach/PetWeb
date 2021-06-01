@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="img/pawbig.png" sizes="16x16" />
+    <link rel="stylesheet" href="home.css">
+    <title>HOLD MY PET</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="header">
+            <nav class="navbar">
+                <div class="logo">
+                    HOLD MY PET <img src="img/pawbig.png" class="piclogo">
+                </div>
+                <a href="#" class="toggle-button">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </a>
+                <div class="navbar-links">
+                    <ul>
+                        <li><a href="homeFirst.html">หน้าหลัก</a></li>
+                        <li><a href="login.html">โรงแรมของฉัน</a></li>
+                        <li><a href="login.html">ประวัติ</a></li>
+                        <li><a href="login.html">เข้าสู่ระบบ</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+
+        <div id="main">
+            <div class="searchLeft">
+                <h3>เลือกตำเเหน่งให้บริการ</h3>
+                <div id="searchWrapper">
+                    <input type="text" name="search" id="search" placeholder="Search for location">
+                </div>
+                <h3>ค้นหาโรงเเรมสัตว์เลี้ยงทั้งหมด</h3>
+
+                <div class="blogSearch" id="blogSearch">
+                    <!-- <div class="blog">
+                        <div class="blogText">
+                            <h4>fistname lastname (คะแนน)</h4>
+                            <p>จำนวนที่รองรับต่อวัน : แมว  ตัว</p>
+                            <p>อาการที่รองรับ : ปกติ</p>
+                            <p>bangkok Nonthaburi 11130</p>
+                        </div>
+                        <div class="blogBtn">
+                            <button id="info" class="infoBtn" onclick="ShowInfo()">รายละเอียด</button>
+                            <a id="booking" href="#"><button class="booking" >จอง</button></a>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="searchRight">
+                <div class="mapping"></div>
+                <div id="map"></div>
+            </div>
+        </div>
+        <div id="footer">
+            <footer>
+            </footer>
+        </div>
+
+        <div class="bgShow" id="bgShow">
+            <div class="ShowInfo">
+                <div id="Close" onclick="CloseInfo()"><img class="cancel" id="cancel" src="img/cancel.png"></div>
+                <div class="grid-ShowInfo">
+                    <div id="left">
+                        <div id="HostInfo">
+                            <bigfont><span id="hotelName"></span></bigfont>
+                            <h3>ติดต่อ : <span id="tell"></span></h3>
+                            <h3>คะแนนรีวิว : (<span id="score"></span>)</h3><br>
+                            <h3>จำนวนที่รองรับต่อวัน : แมว <span id="catNumber"></span> ตัว</h3>
+                            <h3>หมายเหตุ : <span id="hotelNote"></span></h3>
+                            <div class="button-HostInfo" id="button-HostInfo">
+                                <button class="Link-FB" id="Link-FB" target="_blank">ติดต่อ</button>
+                                <button class="booking" id="booking" name="booking">จอง</button>
+                            </div>
+                        </div>
+                        <div id="review">
+                            <bigfont>รีวิว</bigfont>
+                            <div id="reviewInfo">
+                                <!-- <div class="Review">
+                                    <h4><span>fistname</span> <span>lastname</span>
+                                        (<span class="score-Review">คะแนน</span>)</h4>
+                                    <p><span>รีวิว</span></p>
+                                </div>
+                                <div class="Review">
+                                    <h4><span>fistname</span> <span>lastname</span>
+                                        (<span class="score-Review">คะแนน</span>)</h4>
+                                    <h5><span>รีวิว</span></h5>
+                                </div>
+    
+                                <div class="Review">
+                                    <h4><span>fistname</span> <span>lastname</span>
+                                        (<span class="score-Review">คะแนน</span>)</h4>
+                                    <h5><span>รีวิว</span></h5>
+                                </div> -->
+                            </div>
+                            <!-- ตัวอย่างรีวิว -->
+                        </div>
+                    </div>
+
+                    <div id="right">
+                        <div class="mapping"></div>
+                        <div id="myMap"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-cE5DFDO2ir695dGBOLOwHRg-sTv-x9Q&callback=initMap&libraries=&v=weekly"
+        async></script>
+    <script src="home.js" defer></script>
+</body>
+
+</html>

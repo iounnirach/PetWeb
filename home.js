@@ -321,6 +321,12 @@ async function hotelBooking_ID(hotelID){ // save cookie hotel_id
         post:hotelID}) // ส่งค่า hotelID ไปให้ server.js
     })
     const content = await response.json();
-    // console.log(content);
-    document.location.href = "http://localhost:3001/booking.html";
+    console.log(content);
+    if(content == null){
+        alert("Please login to view this page!");
+        document.location.href = "http://localhost:3001/login.html";
+    }
+    else{
+        document.location.href = "http://localhost:3001/booking.html";
+    }
 }

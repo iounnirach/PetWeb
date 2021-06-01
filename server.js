@@ -1,4 +1,5 @@
 const express = require('express');
+var session = require('express-session');
 const app = express();
 const hostname = 'localhost';
 const port = 3001;
@@ -12,6 +13,12 @@ app.use(express.static(__dirname));
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
+
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
 
 const con = mysql.createConnection({
     host: "localhost",
@@ -40,6 +47,7 @@ const queryDB = (sql) => {
         })
     })
 }
+// Ioun home page //////////////////////////////////////////////////////////////
 ///////////////////// show home map /////////////////////
 
 app.get("/getDBMap", async (req,res) => {
@@ -50,6 +58,7 @@ app.get("/getDBMap", async (req,res) => {
     // for(let i=0; i<result.length; i++){
     //     res.json([result[i].lat, result[i].lng, result[i].hotel_name]);
     // }
+    // req.session.loggedin = true;
     res.json(result);
 });
 
@@ -151,11 +160,16 @@ app.post("/getDBMapDetail", async (req,res) => {
 ///////////////////// click booking button /////////////////////
 
 app.post("/getHotelBooking_id", async (req,res) => {
-    let getHotelID = req.body.post;
-    console.log(getHotelID);
-    res.cookie('hotel_id', getHotelID, 1);
-    res.json(getHotelID);
-    // return res.redirect('booking.html');
+    if (req.session.loggedin) {
+		let getHotelID = req.body.post;
+        console.log(getHotelID);
+        res.cookie('hotel_id', getHotelID, 1);
+        res.json(getHotelID);
+        // return res.redirect('booking.html');
+	} else {
+		// alert("Please login to view this page!");
+        res.json(null);
+	}
 });
 
 app.listen(port, hostname, () => {
