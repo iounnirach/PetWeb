@@ -18,8 +18,8 @@ app.use(cookieParser());
 
 const con = mysql.createConnection({
     host: "localhost",
-    user: "dataweb",
-    password: "Tang120343",
+    user: "root",
+    password: "",
     database: "HOLD_MY_CAT"
 })
 con.connect(err => {
