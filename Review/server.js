@@ -43,7 +43,7 @@ const queryDB = (sql) => {
 
 ///////////////////// show all hotel /////////////////////
 //http method get for request information
-app.get("/showDBChair", async (req,res) => {
+app.get("/", async (req,res) => {
     //  * change hotel_name address subdistrict district province postal_code 
     let sql = `SELECT * FROM HOLD_MY_CAT.hotel_name, HOLD_MY_CAT.hotel_address, HOLD_MY_CAT.hotel_subdistrict, HOLD_MY_CAT.hotel_district, HOLD_MY_CAT.hotel_province, HOLD_MY_CAT.hotel_postal_code`;
     let result = await queryDB(sql);
