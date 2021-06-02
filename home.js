@@ -330,6 +330,6 @@ async function hotelBooking_ID(hotelID){ // save cookie hotel_id
         document.location.href = "http://localhost:3001/login.html";
     }
     else{
-        document.location.href = "http://localhost:3001/booking.html";
+        document.location.href = "http://localhost:3001/Booking_guest_page.html";
     }
 }
