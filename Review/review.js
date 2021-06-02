@@ -10,21 +10,22 @@ window.onload = pageload();
 // }
 // name = name+lastname
 
-async function detail_hotel(){
-    const response = await fetch("\hotel_review");
-    review_hotel = await response.json();
-    console.log(review_hotel);
-}
+// async function detail_hotel(){
+//     const response = await fetch("\hotel_review");
+//     review_hotel = await response.json();
+//     console.log(review_hotel);
+// }
 
-function hotelreview(data){
-    var hotelname = document.getElementById("name_hotel");
-    var tel = document.getElementById("tel_hotel");
-    var position = document.getElementById("position_hotel");
+// function hotelreview(data){
+//     var hotelname = document.getElementById("name_hotel");
+//     var tel = document.getElementById("tel_hotel");
+//     var position = document.getElementById("position_hotel");
 
-    hotelname.innerHTML = data.hotel_name;
-    tel.innerHTML = data.tel;
-    position.innerHTML = data.address + data.address + data.subdistrict + data.district + data.province + data.postal_code;
-}
+//     hotelname.innerHTML = data.hotel_name;
+//     tel.innerHTML = data.tel;
+//     position.innerHTML = data.address + "" +data.address + "" + data.subdistrict + "" + data.district + "" 
+//     + data.province + "" + data.postal_code;
+// }
 
 
 async function confirm_review() {
@@ -40,13 +41,6 @@ async function confirm_review() {
     //id มีแค่ตัวเดียว
     var msg = document.getElementById("review").value;
     alert("Thank you for review");
-
-
-
-
-
-
-
 
 
     await fetch("/review", {

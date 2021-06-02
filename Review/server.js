@@ -18,9 +18,6 @@ const con = mysql.createConnection({
     user: "root",
     password: "",
     database: "HOLD_MY_CAT",
-    // socketPath: '/var/run/mysqld/mysqld.sock',
-    // port:"3001",
-    // multipleStatements: true
 })
 
 con.connect(err => {
@@ -43,7 +40,7 @@ const queryDB = (sql) => {
 
 ///////////////////// show all hotel /////////////////////
 //http method get for request information
-app.get("/", async (req,res) => {
+app.get("", async (req,res) => {
     //  * change hotel_name address subdistrict district province postal_code 
     let sql = `SELECT * FROM HOLD_MY_CAT.hotel_name, HOLD_MY_CAT.hotel_address, HOLD_MY_CAT.hotel_subdistrict, HOLD_MY_CAT.hotel_district, HOLD_MY_CAT.hotel_province, HOLD_MY_CAT.hotel_postal_code`;
     let result = await queryDB(sql);
