@@ -38,11 +38,10 @@ const queryDB = (sql) => {
     })
 }
 
-///////////////////// show all hotel /////////////////////
 //http method get for request information
 app.get("/showHotelReview", async (req,res) => {
     //  * change hotel_name address subdistrict district province postal_code 
-    let sql = `SELECT * FROM HOLD_MY_CAT.hotel_name, HOLD_MY_CAT.hotel_address, HOLD_MY_CAT.hotel_subdistrict, HOLD_MY_CAT.hotel_district, HOLD_MY_CAT.hotel_province, HOLD_MY_CAT.hotel_postal_code WHERE `;
+    let sql = `SELECT * FROM HOLD_MY_CAT.hotel_name, HOLD_MY_CAT.hotel_address, HOLD_MY_CAT.hotel_subdistrict, HOLD_MY_CAT.hotel_district, HOLD_MY_CAT.hotel_province, HOLD_MY_CAT.hotel_postal_code`;
     let result = await queryDB(sql);
     result = Object.assign({},result);
     res.json(result);
@@ -51,11 +50,11 @@ app.get("/showHotelReview", async (req,res) => {
 //REVIEW
 // htpp method use post for insert or add information
 app.post("/review", async (req,res) => {
-    const sql = `INSERT INTO HOLD_MY_CAT.review (user_id, hotel_id, score, review_note) VALUES (${req.cookie.user_id},${req.body.body_hotel_id},
-    ${req.body.score_review},'${req.body.text_review}')`;
+    const sql = `INSERT INTO HOLD_MY_CAT.review (user_id, hotel_id, score, review_note) VALUES (${req.cookie.user_id},${req.body.body_hotel_id},${req.body.score_review},'${req.body.text_review}')`;
     const result = await queryDB(sql);
-    // res.send(data);
-    res.end();
+    res.send();
+    return res.redirect('home.html');
+ 
 });
 
 app.listen(port, () => {

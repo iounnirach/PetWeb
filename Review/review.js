@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 window.onload = pageload();
 function pageload(){
     hotelProfile();
@@ -37,13 +39,14 @@ async function hotelProfile() {
 }
 
 function hotelReview(data){
-     var hotelname = document.getElementById("hotelName");
-     var tel = document.getElementById("hotelTel");
-     var position = document.getElementById("hotelPosition");
+    var hotelname = document.getElementById("hotelName");
+    var tel = document.getElementById("hotelTel");
+    var position = document.getElementById("hotelPosition");
 
-     hotelname.innerHTML = data.hotel_name;
-     tel.innerHTML = data.tell;
-     position.innerHTML = data.address + "" + data.subdistrict + "" + data.district + "" + data.province + "" + data.postal_code;
+    hotelname.innerHTML = data.hotel_name;
+    tel.innerHTML = data.tell;
+    position.innerHTML = data.address + "" + data.subdistrict + "" + data.district + "" + data.province + "" + data.postal_code;
+    console.log(data);
 }
 // window.onload = pageload();
 
@@ -74,14 +77,17 @@ async function confirm_review() {
             score: rreq.body.score_review,
             review_msg: req.body.text_review,
         })
-    }).then((response) => {
+    })
+    .then((response) => {
         response.json().then((data) => {
             alert(data);
         });
     }).catch((err) => {
         alert(err);
     });
+   
 }
+
 
 
 
