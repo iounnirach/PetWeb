@@ -300,3 +300,133 @@ app.get('/logout', (req, res) => {
 })
 
 // Poom booking page //////////////////////////////////////////////////////////////
+
+// โชจำนวนเเมวหน้าทำการจอง
+app.get("/chack_numcat", async(req, res) => {
+    let sql_numcat = `SELECT cat_number FROM HOLD_MY_CAT.hotel_profile WHERE hotel_id = ${req.cookies.hotel_id} ;`; //'${data.cookies.hotel_id}'
+    let result = await queryDB(sql_numcat);
+    result = Object.assign({}, result);
+    res.json(result[0].cat_number);
+})
+
+// สำหรับหน้า รายละเอียด
+app.get("/chackdata_bookinginfo_Detail", async(req, res) => {
+    let sql = ` SELECT bi.booking_id, bi.user_id, up.name , up.lastname , up.tell, DATE_FORMAT(bi.start_deal,"%Y-%m-%d")AS start_deal, bi.normal , bi.sick , bi.how_sick , bi.nights , bi.booking_note , bi.normal_price, bi.sick_price
+                FROM HOLD_MY_CAT.user_profile AS up
+                INNER JOIN HOLD_MY_CAT.booking_info AS bi
+                ON up.user_id = bi.user_id
+                WHERE booking_id = 1;`; //'${data.cookies.hotel_id}'
+    let result = await queryDB(sql);
+    result = Object.assign({}, result);
+    res.json(result[0]);
+})
+// สำหรับหน้า รายละเอียด
+app.get("/chackdata_hotelInfo_Detail", async(req, res) => {
+    let sql = ` SELECT hp.user_id ,
+                hp.hotel_name ,
+                hp.address ,
+                hp.subdistrict ,
+                hp.district ,
+                hp.province ,
+                hp.postal_code ,
+                up.tell
+                FROM HOLD_MY_CAT.hotel_profile hp
+                INNER JOIN HOLD_MY_CAT.user_profile as up
+                ON hp.user_id = up.user_id
+                INNER JOIN HOLD_MY_CAT.booking_info as bi
+                ON hp.hotel_id = bi.hotel_id
+                WHERE bi.booking_id = 1`; //'${data.cookies.hotel_id}'
+    let result = await queryDB(sql);
+    result = Object.assign({}, result);
+    console.log(result);
+    res.json(result[0]);
+})
+
+// เพิ่มข้อมูลเข้า booking_info
+app.post('/insert_databooking', async(req, res) => {
+    let sql = `SELECT cat_number FROM HOLD_MY_CAT.hotel_profile WHERE hotel_id = ${req.cookies.hotel_id} ;`;
+    let result = await queryDB(sql);
+    let hotelCat = parseInt(result[0].cat_number);
+    let normal_symptom = parseInt(req.body.normal_symptom);
+    let sick_symptom = parseInt(req.body.sick_symptom);
+    let totalCat = normal_symptom + sick_symptom;
+    let updateCat = hotelCat - totalCat;
+    // console.log(updateCat);
+    if(totalCat > result[0].cat_number){
+        alert("จำนวนเเมวที่จองมากกว่าจำนวนเเมวรับฝากสูงสุดของโรงเเรม กรุณาจองใหม่อีกครั้ง");
+        return res.send('error');
+    }
+    else if(totalCat == 0){
+        alert("กรุณากรอกจำนวนเเมวที่ต้องการฝากอย่างน้อย 1 ตัว");
+        return res.send('error');
+    }
+    else{
+        sql = `INSERT INTO HOLD_MY_CAT.booking_info
+        (user_id, hotel_id, normal, sick, nights, how_sick, start_deal, booking_note, normal_price, sick_price, status, Setup) VALUES
+        (${req.cookies.user_id}, ${req.cookies.hotel_id},${req.body.normal_symptom},${req.body.sick_symptom},${req.body.nights},"${req.body.how_sick}", "${req.body.start_deal}", "${req.body.booking_note}", 200, 500, "active", 3);`;
+        result = await queryDB(sql);
+        sql = `UPDATE HOLD_MY_CAT.hotel_profile SET cat_number = ${updateCat} WHERE hotel_id = ${req.cookies.hotel_id}`;
+        result = await queryDB(sql);
+        sql = `SELECT booking_id FROM HOLD_MY_CAT.booking_info WHERE user_id = ${req.cookies.user_id} ORDER BY booking_id DESC`;
+        result = await queryDB(sql);
+        // console.log(result[0].booking_id);
+        res.cookie('myBooking', result[0].booking_id); // การจองครั้งล่าสุด
+        alert("คุณทำการจองสำเร็จเเล้ว");
+        return res.redirect("Confirm_guest_page.html");
+    }
+})
+// เเสดงข้อมูลเมื่อกดปุ่นยืนยันการจองเเล้ว
+app.get("/chackdataBooking_guest_confirm", async(req, res) => {
+    let sql = `SELECT normal, sick, nights, how_sick, DATE_FORMAT(start_deal,"%Y-%m-%d")AS start_deal, booking_note , normal_price, sick_price FROM HOLD_MY_CAT.booking_info WHERE booking_id = ${req.cookies.myBooking} AND user_id = ${req.cookies.user_id}; `; //'${req.cookies.hotel_id}'
+    let result = await queryDB(sql);
+    result = Object.assign({}, result);
+    res.json(result[0]);
+})
+// ลบข้อมูลเมื่อกดปุ่มยกเลิกการจอง
+app.get("/delete_booking", async(req, res) => {
+    let sql = `SELECT cat_number FROM HOLD_MY_CAT.hotel_profile WHERE hotel_id = ${req.cookies.hotel_id}`;
+    let result = await queryDB(sql);
+    let hotelCat = result[0].cat_number;
+    console.log("hotel"+ hotelCat);
+    sql = `SELECT normal, sick FROM HOLD_MY_CAT.booking_info WHERE user_id = ${req.cookies.user_id} ORDER BY booking_id DESC`;
+    result = await queryDB(sql);
+    let normal = result[0].normal;
+    let sick = result[0].sick;
+    console.log("nomal"+ normal);
+    console.log("sick"+ sick);
+    let updateCat = hotelCat + normal + sick;
+    console.log(updateCat);
+    sql = `UPDATE HOLD_MY_CAT.hotel_profile SET cat_number = ${updateCat} WHERE hotel_id = ${req.cookies.hotel_id}`;
+    result = await queryDB(sql);
+    sql = `DELETE FROM HOLD_MY_CAT.booking_info WHERE booking_id = ${req.cookies.myBooking} ;`;
+    result = await queryDB(sql);
+    res.cookie('myBooking', { maxAge: 0 }, 'path=/');
+    alert("คุณยกเลิกการจองสำเร็จเเล้ว");
+    return res.json(result);
+    // return res.redirect("Booking_guest_page.html");
+})
+// สำหรับหน้า รายละเอียด user
+app.get("/userDeleteBooking", async(req, res) => {
+    let sql = `SELECT cat_number FROM HOLD_MY_CAT.hotel_profile WHERE hotel_id = 1`;
+    let result = await queryDB(sql);
+    let hotelCat = result[0].cat_number;
+    console.log("hotel"+ hotelCat);
+    sql = `SELECT normal, sick FROM HOLD_MY_CAT.booking_info WHERE user_id = 1 ORDER BY booking_id DESC`;
+    result = await queryDB(sql);
+    let normal = result[0].normal;
+    let sick = result[0].sick;
+    console.log("nomal"+ normal);
+    console.log("sick"+ sick);
+    let updateCat = hotelCat + normal + sick;
+    console.log(updateCat);
+    sql = `UPDATE HOLD_MY_CAT.hotel_profile SET cat_number = ${updateCat} WHERE hotel_id = 1`;
+    result = await queryDB(sql);
+    sql = `UPDATE HOLD_MY_CAT.booking_info SET status = "cencel" WHERE booking_id = 1`
+    result = await queryDB(sql);
+    alert("ยกเลิกการจองสำเร็จ");
+    return res.json(result);
+})
+
+// app.get("/confirm_booking", async(req, res) => {
+//     res.redirect("Booking_guest_page.html");
+// })
