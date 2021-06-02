@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 var cookieParser = require('cookie-parser');
 var alert = require('alert');
+const { isNull } = require('util');
 
 app.use(express.static(__dirname));
 
@@ -58,6 +59,15 @@ app.get("/getDBMap", async (req,res) => {
     // for(let i=0; i<result.length; i++){
     //     res.json([result[i].lat, result[i].lng, result[i].hotel_name]);
     // }
+    let sql2 = `SELECT hotel_id FROM hotel_profile WHERE user_id = '${req.cookies.user_id}'`;
+    let result2 = await queryDB(sql2);
+    // console.log(result2);
+    if(result2 != ""){
+        res.cookie('myHotel', result2[0].hotel_id, { maxAge: 86400000 }, 'path=/');
+    }
+    else if(result2 == ""){
+        console.log("คุณยังไม่ได้สร้างโรงเเรม");
+    }
     res.json(result);
 });
 
@@ -161,7 +171,7 @@ app.post("/getDBMapDetail", async (req,res) => {
 app.post("/getHotelBooking_id", async (req,res) => {
     let getHotelID = req.body.post;
     if (req.session.loggedin) {
-        console.log(getHotelID);
+        // console.log(getHotelID);
         res.cookie('hotel_id', getHotelID, 1);
         res.json(getHotelID);
         // return res.redirect('booking.html');
@@ -200,7 +210,6 @@ app.post('/login', async (req, res) => {
             res.cookie('mail', result[0].mail, { maxAge: 86400000 }, 'path=/');
             res.cookie('user_id', result[0].user_id, { maxAge: 86400000 }, 'path=/');
             req.session.loggedin = true;
-
             console.log("Login success!");
             // console.log("mail : " + result[0].mail);
             // console.log("password : " + result[0].password);
@@ -283,7 +292,7 @@ app.get('/showhotel', async (req, res) => {
 app.get('/deletehotel', async (req, res) => {
     let sql = `DELETE FROM hotel_profile WHERE user_id="${req.cookies.user_id}"`;
     let result = await queryDB(sql);
-    res.cookie('myHotel', { maxAge: 0 }, 'path=/');
+    res.clearCookie('myHotel'); 
     console.log("Delete hotel!");
     return res.redirect("myhotel.html");
 })
@@ -292,10 +301,15 @@ app.get('/deletehotel', async (req, res) => {
 
 //logout
 app.get('/logout', (req, res) => {
-    res.cookie('user_id', '', { maxAge: 0 }, 'path=/');
-    res.cookie('mail', '', { maxAge: 0 }, 'path=/');
-    res.cookie('myHotel', { maxAge: 0 }, 'path=/');
-    res.cookie('hotel_id', { maxAge: 0 }, 'path=/');
+    res.clearCookie('user_id'); 
+    res.clearCookie('mail'); 
+    res.clearCookie('hotel_id'); 
+    res.clearCookie('myHotel'); 
+    req.session.loggedin = false;
+    // res.cookie('user_id', '', { maxAge: 0 }, 'path=/');
+    // res.cookie('mail', '', { maxAge: 0 }, 'path=/');
+    // res.cookie('myHotel', { maxAge: 0 }, 'path=/');
+    // res.cookie('hotel_id', { maxAge: 0 }, 'path=/');
     return res.redirect('homeFirst.html');
 })
 
@@ -338,7 +352,7 @@ app.get("/chackdata_hotelInfo_Detail", async(req, res) => {
                 WHERE bi.booking_id = 1`; //'${data.cookies.hotel_id}'
     let result = await queryDB(sql);
     result = Object.assign({}, result);
-    console.log(result);
+    // console.log(result);
     res.json(result[0]);
 })
 
@@ -400,7 +414,8 @@ app.get("/delete_booking", async(req, res) => {
     result = await queryDB(sql);
     sql = `DELETE FROM HOLD_MY_CAT.booking_info WHERE booking_id = ${req.cookies.myBooking} ;`;
     result = await queryDB(sql);
-    res.cookie('myBooking', { maxAge: 0 }, 'path=/');
+    res.clearCookie('myBooking');
+    // res.cookie('myBooking', { maxAge: 0 }, 'path=/');
     alert("คุณยกเลิกการจองสำเร็จเเล้ว");
     return res.json(result);
     // return res.redirect("Booking_guest_page.html");
@@ -430,3 +445,91 @@ app.get("/userDeleteBooking", async(req, res) => {
 // app.get("/confirm_booking", async(req, res) => {
 //     res.redirect("Booking_guest_page.html");
 // })
+
+// I history page //////////////////////////////////////////////////////////////
+
+
+app.get('/readhistoryDBuser', async (req, res) => {
+    let sql = `SELECT name,lastname,hotel_name,DATE_FORMAT(start_deal, "%Y-%m-%d") AS start_deal,status,booking_id,Setup FROM booking_info
+        INNER JOIN user_profile ON booking_info.user_id=user_profile.user_id
+        INNER  JOIN hotel_profile ON booking_info.hotel_id=hotel_profile.hotel_id WHERE booking_info.user_id = ${req.cookies.user_id} ORDER BY booking_id DESC`;//join 2รอบ
+    let result = await queryDB(sql);
+    result = Object.assign({}, result);
+    // console.log(result);
+    res.json(result);
+})
+app.get('/readhistoryDBhost', async (req, res) => {
+    let sql = `SELECT name,lastname,hotel_name,DATE_FORMAT(start_deal, "%Y-%m-%d") AS start_deal,status,nights,booking_id,Setup FROM booking_info
+    INNER JOIN user_profile ON booking_info.user_id=user_profile.user_id
+    INNER  JOIN hotel_profile ON booking_info.hotel_id=hotel_profile.hotel_id WHERE booking_info.hotel_id = ${req.cookies.myHotel} ORDER BY booking_id DESC`;//join 2รอบ
+    let result = await queryDB(sql);
+    result = Object.assign({}, result);
+    // console.log(result);
+    res.json(result);
+})
+app.post('/updateprocessbegin', async (req, res) => {
+    let bookingId = req.body.post;
+    let sql = `UPDATE booking_info SET Setup = '0' WHERE booking_id = '${bookingId}'`;//join 2รอบ
+    let result = await queryDB(sql);
+    result = Object.assign({}, result);
+    // console.log(result);
+    res.json(result);
+})
+app.post('/updateprocessend', async (req, res) => {
+    let bookingId = req.body.post;
+    let sql = `UPDATE booking_info SET Setup = '1' WHERE booking_id = ${bookingId}`;//join 2รอบ
+    let result = await queryDB(sql);
+    // calculateCatNumber //////////////////////////
+    let sql2 = `SELECT cat_number FROM HOLD_MY_CAT.hotel_profile WHERE hotel_id = ${req.cookies.myHotel}`
+    let result2 = await queryDB(sql2);
+    let hotelCat = result2[0].cat_number;
+    sql2 = `SELECT normal, sick FROM HOLD_MY_CAT.booking_info WHERE booking_id = ${bookingId}`;
+    result2 = await queryDB(sql2);
+    let normal = result2[0].normal;
+    let sick = result2[0].sick;
+    let updateCat = hotelCat + normal + sick;
+    sql2 = `UPDATE HOLD_MY_CAT.hotel_profile SET cat_number = ${updateCat} WHERE hotel_id = ${req.cookies.myHotel}`;
+    result2 = await queryDB(sql2);
+    // calculateCatNumber //////////////////////////
+    result = Object.assign({}, result);
+    // console.log(result);
+    res.json(result);
+})
+app.post('/updateprocesscancle', async (req, res) => {
+    let bookingId = req.body.post;
+    let sql = `UPDATE booking_info SET Setup = '2' WHERE booking_id = '${bookingId}'`;//join 2รอบ
+    let result = await queryDB(sql);
+    // calculateCatNumber //////////////////////////
+    let sql2 = `SELECT cat_number FROM HOLD_MY_CAT.hotel_profile WHERE hotel_id = ${req.cookies.myHotel}`
+    let result2 = await queryDB(sql2);
+    let hotelCat = result2[0].cat_number;
+    sql2 = `SELECT normal, sick FROM HOLD_MY_CAT.booking_info WHERE booking_id = ${bookingId}`;
+    result2 = await queryDB(sql2);
+    let normal = result2[0].normal;
+    let sick = result2[0].sick;
+    let updateCat = hotelCat + normal + sick;
+    sql2 = `UPDATE HOLD_MY_CAT.hotel_profile SET cat_number = ${updateCat} WHERE hotel_id = ${req.cookies.myHotel}`;
+    result2 = await queryDB(sql2);
+    // calculateCatNumber //////////////////////////
+    result = Object.assign({}, result);
+    // console.log(result);
+    res.json(result);
+})
+app.post('/showdetail', async (req, res) => {
+    let bookingId = req.body.post;
+    res.cookie('bookingId', bookingId, 1);
+
+
+
+
+
+
+    res.end();
+})
+app.post('/gotoreview', async (req, res) => {
+
+
+
+
+
+})
