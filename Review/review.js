@@ -1,8 +1,10 @@
 window.onload = pageload();
-
-// function pageload(){
-    detail_hotel();
+function pageload(){
+    hotelProfile();
     confirm_review();
+}
+// function pageload(){
+//     confirm_review();
 // }
 
 // function score_review(){
@@ -27,6 +29,23 @@ window.onload = pageload();
 //     + data.province + "" + data.postal_code;
 // }
 
+async function hotelProfile() {
+    const response = await fetch("\showHotelReview");
+    content = await response.json();
+    console.log(content);
+    hotelReview(content);
+}
+
+function hotelReview(data){
+     var hotelname = document.getElementById("hotelName");
+     var tel = document.getElementById("hotelTel");
+     var position = document.getElementById("hotelPosition");
+
+     hotelname.innerHTML = data.hotel_name;
+     tel.innerHTML = data.tell;
+     position.innerHTML = data.address + "" + data.subdistrict + "" + data.district + "" + data.province + "" + data.postal_code;
+}
+// window.onload = pageload();
 
 async function confirm_review() {
     // document.getElementsById("demo").innerHTML = msg;
@@ -63,6 +82,9 @@ async function confirm_review() {
         alert(err);
     });
 }
+
+
+
 
 
 
