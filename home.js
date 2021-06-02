@@ -91,6 +91,7 @@ searchBar.addEventListener('keyup', (e) => {
     const filteredHotel = allHotel.filter((hotel) => {
         return (
             // hotel.subdistrict.includes(searchString) // เอาค่ามาเฉยๆ ยังไม่ได้เเปลงให้เป็นตัวพิมเล็ก
+            hotel.hotel_name.toLowerCase().includes(searchString) ||
             hotel.subdistrict.toLowerCase().includes(searchString) || 
             hotel.district.toLowerCase().includes(searchString) || 
             hotel.province.toLowerCase().includes(searchString)
@@ -220,9 +221,9 @@ function hotelDetail(data){
     var bookingBtn = document.getElementsByName('booking')[0];
     bookingBtn.id = data.hotel_id;
     bookingBtn.onclick = getToHotelBookingDetail;
-    document.getElementById(`${data.hotel_id}`).onclick = function (){
-        location.href = 'http://localhost:3001/booking.html';
-    }
+    // document.getElementById(`${data.hotel_id}`).onclick = function (){
+    //     location.href = 'http://localhost:3001/booking.html';
+    // }
 
     document.getElementById("Link-FB").onclick = function (){
         location.href = data.linkFB;

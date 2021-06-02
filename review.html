@@ -1,0 +1,90 @@
+<html>
+
+<head>
+	<title>menu</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="img/pawbig.png" sizes="16x16" />
+	<link rel='stylesheet' type='text/css' href='review.css'>
+	<script src="review.js" defer></script>
+
+</head>
+
+
+<body>
+	<nav class="navbar">
+		<div class="logo">HOLD MY PET<img src="img/pawbig.png" class="piclogo"></div>
+		<a href="#" class="toggle-button">
+			<span class="line"></span>
+			<span class="line"></span>
+			<span class="line"></span>
+		</a>
+		<div class="navbar-links">
+			<ul>
+				<li><a href="home.html#">หน้าหลัก</a></li>
+				<li><a href="myhotel.html">โรงแรมของฉัน</a></li>
+				<li><a href="history.html">ประวัติ</a></li>
+				<li class="dropdown">
+					<a href="javascript:void(0)" class="dropbtn">โปรไฟล์ <img class="icon_down"
+							src="img/icondown.png" /></a>
+					<div class="dropdown-content">
+						<a href="profile.html">แก้ไขโปรไฟล์</a>
+						<a href="/logout">ออกจากระบบ</a>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+	</nav>
+	<h2>รีวิว</h2>
+	<div>
+
+		<!--  form action is ไปทำที่ไหนต่อ -->
+		<form action="/review" method="POST" id="addReview">
+			<div>
+				<span>ผู้ให้บริการ :</span>
+				<!-- name="firstname" name="lastname" -->
+				<span id="hotelName"></span> <br>
+
+				<!-- name="tel" -->
+				เบอร์โทรศัพท์ :
+				<span id="hotelTel"></span><br>
+
+				ตำแหน่งที่ตั้ง :
+				<span id="hotelPosition"></span><br><br>
+			</div>
+			<div>
+				<label for="score">คะแนน</label>
+				<input type="radio" name="score_review" id="score5" value="5" class="score" required>
+				<label for="score5">5</label>
+				<input type="radio" name="score_review" id="score4" value="4" class="score" required>
+				<label for="score4">4</label>
+				<input type="radio" name="score_review" id="score3" value="3" class="score" required>
+				<label for="score3">3</label>
+				<input type="radio" name="score_review" id="score2" value="2" class="score" required>
+				<label for="score2">2</label>
+				<input type="radio" name="score_review" id="score1" value="1" class="score" required>
+				<label for="score1">1</label><br>
+			</div>
+
+			<div>
+				<label for="Review">แสดงความคิดเห็น</label> <br><br>
+				<div id="reviewTextarea">
+					<textarea name="text_review" id="review" rows="5%" cols="72%"></textarea>
+				</div>
+			</div>
+
+			<div class="btn_review">
+				<a href="http://localhost:3001/home.html"
+					class="btn_close">ปิด</a>
+				<button name="confirm" onclick="confirm_review();" class="btn_confirm">ยืนยัน</button>
+			</div>
+
+		</form>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+	<!-- <script src="review.js"></script> -->
+</body>
+
+</html>

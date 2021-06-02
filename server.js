@@ -450,7 +450,7 @@ app.get("/userDeleteBooking", async(req, res) => {
 
 
 app.get('/readhistoryDBuser', async (req, res) => {
-    let sql = `SELECT name,lastname,hotel_name,DATE_FORMAT(start_deal, "%Y-%m-%d") AS start_deal,status,booking_id,Setup FROM booking_info
+    let sql = `SELECT booking_info.hotel_id,name,lastname,hotel_name,DATE_FORMAT(start_deal, "%Y-%m-%d") AS start_deal,status,booking_id,Setup FROM booking_info
         INNER JOIN user_profile ON booking_info.user_id=user_profile.user_id
         INNER  JOIN hotel_profile ON booking_info.hotel_id=hotel_profile.hotel_id WHERE booking_info.user_id = ${req.cookies.user_id} ORDER BY booking_id DESC`;//join 2รอบ
     let result = await queryDB(sql);
@@ -459,7 +459,7 @@ app.get('/readhistoryDBuser', async (req, res) => {
     res.json(result);
 })
 app.get('/readhistoryDBhost', async (req, res) => {
-    let sql = `SELECT name,lastname,hotel_name,DATE_FORMAT(start_deal, "%Y-%m-%d") AS start_deal,status,nights,booking_id,Setup FROM booking_info
+    let sql = `SELECT booking_info.hotel_id,name,lastname,hotel_name,DATE_FORMAT(start_deal, "%Y-%m-%d") AS start_deal,status,nights,booking_id,Setup FROM booking_info
     INNER JOIN user_profile ON booking_info.user_id=user_profile.user_id
     INNER  JOIN hotel_profile ON booking_info.hotel_id=hotel_profile.hotel_id WHERE booking_info.hotel_id = ${req.cookies.myHotel} ORDER BY booking_id DESC`;//join 2รอบ
     let result = await queryDB(sql);
@@ -521,9 +521,32 @@ app.post('/showdetail', async (req, res) => {
     res.redirect("Detail_booking_owner.html");
 })
 app.post('/gotoreview', async (req, res) => {
-
-
-
-
-
+    let reviewId = req.body.post;
+    res.cookie('reviewId', reviewId, 1);
+    res.redirect("review.html");
 })
+
+// Toon review page //////////////////////////////////////////////////////////////
+
+//http method get for request information
+app.get("/showHotelReview", async (req,res) => {
+    console.log("review");
+    //  * change hotel_name address subdistrict district province postal_code 
+    let sql = ` SELECT hp.hotel_name, up.tell, hp.address, hp.subdistrict, hp.district, hp.province, hp.postal_code
+                FROM HOLD_MY_CAT.hotel_profile AS hp
+                INNER JOIN HOLD_MY_CAT.user_profile AS up
+                ON hp.user_id = up.user_id
+                WHERE hotel_id = ${req.cookies.reviewId}`;
+    let result = await queryDB(sql);
+    // result = Object.assign({},result);
+    console.log(result);
+    res.json(result[0]);
+});
+
+//REVIEW
+// htpp method use post for insert or add information
+app.post("/review", async (req,res) => {
+    const sql = `INSERT INTO HOLD_MY_CAT.review (user_id, hotel_id, score, review_note) VALUES (${req.cookies.user_id},${req.cookies.reviewId},${req.body.score_review},'${req.body.text_review}')`;
+    const result = await queryDB(sql);
+    return res.redirect('home.html');
+});

@@ -74,6 +74,7 @@ function showhistoryDataUser(data) {
 
         var reviewbtn = document.createElement("button");
         reviewbtn.className = "begin";
+        reviewbtn.id = [data[keys[i]].hotel_id];
         reviewbtn.onclick = review;
 
 
@@ -251,19 +252,19 @@ async function detail(bookingID) {
 }
 function review() {
     gotoreview(this.id);
-    console.log(this.id);
+    // console.log(this.id);
     
 }
 
-async function gotoreview(){
-    const response = await fetch("/showdetail", {
+async function gotoreview(reviewID){
+    const response = await fetch("/gotoreview", {
         method: "POST",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            post: bookingID
+            post: reviewID
         }) // ส่งค่า hotelID ไปให้ server.js
     })
     document.location.href = "http://localhost:3001/review.html";
