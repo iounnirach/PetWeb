@@ -329,7 +329,7 @@ app.get("/chackdata_bookinginfo_Detail", async(req, res) => {
                 FROM HOLD_MY_CAT.user_profile AS up
                 INNER JOIN HOLD_MY_CAT.booking_info AS bi
                 ON up.user_id = bi.user_id
-                WHERE booking_id = 1;`; //'${data.cookies.hotel_id}'
+                WHERE booking_id = ${req.cookies.bookingId};`; //'${data.cookies.hotel_id}'
     let result = await queryDB(sql);
     result = Object.assign({}, result);
     res.json(result[0]);
@@ -349,7 +349,7 @@ app.get("/chackdata_hotelInfo_Detail", async(req, res) => {
                 ON hp.user_id = up.user_id
                 INNER JOIN HOLD_MY_CAT.booking_info as bi
                 ON hp.hotel_id = bi.hotel_id
-                WHERE bi.booking_id = 1`; //'${data.cookies.hotel_id}'
+                WHERE bi.booking_id = ${req.cookies.bookingId}`; //'${data.cookies.hotel_id}'
     let result = await queryDB(sql);
     result = Object.assign({}, result);
     // console.log(result);
@@ -518,13 +518,7 @@ app.post('/updateprocesscancle', async (req, res) => {
 app.post('/showdetail', async (req, res) => {
     let bookingId = req.body.post;
     res.cookie('bookingId', bookingId, 1);
-
-
-
-
-
-
-    res.end();
+    res.redirect("Detail_booking_owner.html");
 })
 app.post('/gotoreview', async (req, res) => {
 

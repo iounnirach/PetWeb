@@ -231,7 +231,6 @@ function showhistoryDataHost(data) {
     }
 }
 async function detailbook() {
-    console.log("ภูมิทำ");
     detail(this.id);
     console.log(this.id);
 }
@@ -246,7 +245,7 @@ async function detail(bookingID) {
             post: bookingID
         }) // ส่งค่า hotelID ไปให้ server.js
     })
-    document.location.href = "http://localhost:3001/history.html";
+    document.location.href = "http://localhost:3001/Detail_booking_owner.html";
     // const content = await response.json(); // นำค่าที่ได้ไปโชบน hotelDetail
     // hotelDetail(content);
 }
