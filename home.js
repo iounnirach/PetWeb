@@ -171,7 +171,7 @@ const showHotel = (hotels) => { // สร้าง html เเบบใหม่
             return `
             <div class="blog" id="blog">
                 <div class="blogText" id="blogText">
-                    <h4>${hotel.hotel_name} (${totalScore})</h4>
+                    <h4>${hotel.hotel_name} <img src="img/star.png">${totalScore}</h4>
                     <p>จำนวนที่รองรับต่อวัน : แมว ${hotel.cat_number} ตัว</p>
                     <p>อาการที่รองรับ : ${hotel.symptom}</p>
                     <p>${hotel.province} ${hotel.district} ${hotel.subdistrict} ${hotel.postal_code}</p>

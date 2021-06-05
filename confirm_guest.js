@@ -7,23 +7,23 @@ function pageLoad() {
     toggleButton.addEventListener('click', () => {
         nav.classList.toggle('active');
     })
-    getcatnum();
+    // getcatnum();
     getdataBooking_guest_confirm();
     document.getElementById("cancel").onclick = delete_dataBooking;
     document.getElementById("confirm").onclick = confirm_dataBooking;
 }
 
-async function getcatnum() {
-    const response = await fetch("\chack_numcat");
-    const content = await response.json()
-    showdata_cat(content);
-}
+// async function getcatnum() {
+//     const response = await fetch("\chack_numcat");
+//     const content = await response.json()
+//     showdata_cat(content);
+// }
 
-function showdata_cat(data) {
-    var catnum = document.getElementById("catnumber");
-    catnum.innerHTML = data + " ตัว";
-    // catnum.innerHTML = [data[key[0]].hotel_name] + " ตัว";
-}
+// function showdata_cat(data) {
+//     var catnum = document.getElementById("catnumber");
+//     catnum.innerHTML = data + " ตัว";
+//     // catnum.innerHTML = [data[key[0]].hotel_name] + " ตัว";
+// }
 
 async function getdataBooking_guest_confirm() {
     const response = await fetch("\chackdataBooking_guest_confirm");
