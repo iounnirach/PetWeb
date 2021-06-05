@@ -66,7 +66,8 @@ app.get("/getDBMap", async (req,res) => {
         res.cookie('myHotel', result2[0].hotel_id, { maxAge: 86400000 }, 'path=/');
     }
     else if(result2 == ""){
-        console.log("คุณยังไม่ได้สร้างโรงเเรม");
+        res.cookie('myHotel', 0, { maxAge: 86400000 }, 'path=/');
+        // console.log("คุณยังไม่ได้สร้างโรงเเรม");
     }
     res.json(result);
 });
@@ -238,21 +239,36 @@ app.get('/profile_user', async (req, res) => {
     res.end(JSON.stringify(result));
 })
 app.post('/editprofile', async (req, res) => {
-    let sql = `SELECT mail FROM user_profile`;
-    let result = await queryDB(sql);
-    if (req.body.mail !== result) {//เชคว่ามีอีเมลนี่ยัง ถ้าไม่มีเปลี่ยนเป็นเมลนั้นได้
-        let sql = `UPDATE user_profile SET name ='${req.body.firstname}',lastname ='${req.body.lastname}',mail ='${req.body.mail}',tell ='${req.body.tell}',linkFB ='${req.body.linkFB}',password ='${req.body.password}' WHERE user_id = '${req.cookies.user_id}'`;
-        let result = await queryDB(sql);
-        console.log('Update profile');
-        let sql2 = `SELECT mail FROM user_profile WHERE user_id = '${req.cookies.user_id}'`;
-        let result2 = await queryDB(sql2);
-        res.cookie('mail', result2[0].mail, { maxAge: 86400000 }, 'path=/');
-        return res.redirect('profile.html?success=1');
-    }
-    else {
-        console.log("This e-mail is already used!")
-        return res.redirect('profile.html?error=1');
-    }
+    con.query(`SELECT * FROM user_profile WHERE mail = '${req.body.mail}'`, async function (err,result){
+        if(result.length > 0){
+            console.log("This e-mail is already used!")
+            return res.redirect('profile.html?error=1');
+        }
+        else{
+            let sql = `UPDATE user_profile SET name ='${req.body.firstname}',lastname ='${req.body.lastname}',mail ='${req.body.mail}',tell ='${req.body.tell}',linkFB ='${req.body.linkFB}',password ='${req.body.password}' WHERE user_id = '${req.cookies.user_id}'`;
+            let result = await queryDB(sql);
+            console.log('Update profile');
+            let sql2 = `SELECT mail FROM user_profile WHERE user_id = '${req.cookies.user_id}'`;
+            let result2 = await queryDB(sql2);
+            res.cookie('mail', result2[0].mail, { maxAge: 86400000 }, 'path=/');
+            return res.redirect('profile.html?success=1');
+        }
+    });
+    // let sql = `SELECT * FROM user_profile WHERE mail = '${req.body.mail}'`;
+    // let result = await queryDB(sql);
+    // if (req.body.mail !== result) {//เชคว่ามีอีเมลนี่ยัง ถ้าไม่มีเปลี่ยนเป็นเมลนั้นได้
+    //     let sql = `UPDATE user_profile SET name ='${req.body.firstname}',lastname ='${req.body.lastname}',mail ='${req.body.mail}',tell ='${req.body.tell}',linkFB ='${req.body.linkFB}',password ='${req.body.password}' WHERE user_id = '${req.cookies.user_id}'`;
+    //     let result = await queryDB(sql);
+    //     console.log('Update profile');
+    //     let sql2 = `SELECT mail FROM user_profile WHERE user_id = '${req.cookies.user_id}'`;
+    //     let result2 = await queryDB(sql2);
+    //     res.cookie('mail', result2[0].mail, { maxAge: 86400000 }, 'path=/');
+    //     return res.redirect('profile.html?success=1');
+    // }
+    // else {
+    //     console.log("This e-mail is already used!")
+    //     return res.redirect('profile.html?error=1');
+    // }
 })
 //create hotel
 app.post('/createHotel', async (req, res) => {
@@ -368,11 +384,13 @@ app.post('/insert_databooking', async(req, res) => {
     // console.log(updateCat);
     if(totalCat > result[0].cat_number){
         alert("จำนวนเเมวที่จองมากกว่าจำนวนเเมวรับฝากสูงสุดของโรงเเรม กรุณาจองใหม่อีกครั้ง");
-        return res.send('error');
+        // return res.send('error');
+        return res.redirect("booking_guest_page.html");
     }
     else if(totalCat == 0){
         alert("กรุณากรอกจำนวนเเมวที่ต้องการฝากอย่างน้อย 1 ตัว");
-        return res.send('error');
+        // return res.send('error');
+        return res.redirect("booking_guest_page.html");
     }
     else{
         sql = `INSERT INTO HOLD_MY_CAT.booking_info

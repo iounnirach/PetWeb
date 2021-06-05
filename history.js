@@ -102,7 +102,7 @@ function showhistoryDataUser(data) {
                     }
                     else if (processcheck == "2") {
                         process.innerHTML = "รายการจองของคุณถูกยกเลิกโดยผู้ให้บริการ";
-                        reviewbtn.className = "none";
+                        reviewbtn.innerHTML = "รีวิว";
                         container.className = "boxtextRed";
                     }
                     else if (processcheck == "3") {

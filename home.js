@@ -32,8 +32,8 @@ async function getDataMap(){
 
 function initMap(data) {
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 15,
-      center: {lat: 13.745214, lng: 100.496582},
+      zoom: 13,
+      center: {lat: 13.752677, lng: 100.502844},
     //   center: { lat: 34.84555, lng: -111.8035 },
       mapTypeId: "roadmap",
     });
@@ -65,8 +65,9 @@ function initMap(data) {
       const marker = new google.maps.Marker({
         position: new google.maps.LatLng(position.lat, position.lng),
         map,
+        icon: "img/paw3.png",
         title: `${position.hotel_name}`,
-        label: `${i + 1}`,
+        // label: `${i + 1}`,
         optimized: false,
       });
       // Add a click listener for each marker, and set up the info window.
